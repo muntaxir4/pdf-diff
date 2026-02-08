@@ -13,6 +13,7 @@ from difflib import SequenceMatcher
 from typing import Any, Dict, List, Optional, Sequence, Tuple, cast
 
 import pdfplumber
+from diff_pdf import render_github_diff_pdf
 
 
 @dataclass
@@ -82,7 +83,7 @@ def extract_blocks(pdf_path: str) -> List[Block]:
 
                 if not img_hash:
                     img_hash = hash_bytes(
-                        json.dumps(img, sort_keys=True).encode("utf-8")
+                        json.dumps(img, sort_keys=True, default=str).encode("utf-8")
                     )
 
                 x0 = img.get("x0")
@@ -240,6 +241,7 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     parser.add_argument("old_pdf", help="Path to the original PDF")
     parser.add_argument("new_pdf", help="Path to the updated PDF")
     parser.add_argument("--out", "-o", required=True, help="Output JSON path")
+    parser.add_argument("--pdf", help="Output diff PDF path")
     parser.add_argument(
         "--threshold",
         type=float,
@@ -274,6 +276,13 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     except Exception as exc:
         print(f"Error: failed to write output: {exc}", file=sys.stderr)
         return 4
+
+    if args.pdf:
+        try:
+            render_github_diff_pdf(diff, args.pdf)
+        except Exception as exc:
+            print(f"Error: failed to write diff PDF: {exc}", file=sys.stderr)
+            return 5
 
     return 0
 

@@ -1,259 +1,7 @@
 [
   {
-    "block_type": "image",
-    "change": "deleted",
-    "old_index": 16,
-    "new_index": null,
-    "old_page": 0,
-    "new_page": null,
-    "word_diff": []
-  },
-  {
-    "block_type": "image",
-    "change": "deleted",
-    "old_index": 17,
-    "new_index": null,
-    "old_page": 0,
-    "new_page": null,
-    "word_diff": []
-  },
-  {
-    "block_type": "image",
-    "change": "deleted",
-    "old_index": 18,
-    "new_index": null,
-    "old_page": 0,
-    "new_page": null,
-    "word_diff": []
-  },
-  {
-    "block_type": "image",
-    "change": "deleted",
-    "old_index": 19,
-    "new_index": null,
-    "old_page": 0,
-    "new_page": null,
-    "word_diff": []
-  },
-  {
-    "block_type": "image",
-    "change": "deleted",
-    "old_index": 20,
-    "new_index": null,
-    "old_page": 0,
-    "new_page": null,
-    "word_diff": []
-  },
-  {
     "block_type": "paragraph",
-    "change": "added",
-    "old_index": null,
-    "new_index": 1,
-    "old_page": null,
-    "new_page": 0,
-    "word_diff": []
-  },
-  {
-    "block_type": "paragraph",
-    "change": "added",
-    "old_index": null,
-    "new_index": 3,
-    "old_page": null,
-    "new_page": 0,
-    "word_diff": []
-  },
-  {
-    "block_type": "paragraph",
-    "change": "added",
-    "old_index": null,
-    "new_index": 4,
-    "old_page": null,
-    "new_page": 0,
-    "word_diff": []
-  },
-  {
-    "block_type": "paragraph",
-    "change": "added",
-    "old_index": null,
-    "new_index": 5,
-    "old_page": null,
-    "new_page": 0,
-    "word_diff": []
-  },
-  {
-    "block_type": "paragraph",
-    "change": "added",
-    "old_index": null,
-    "new_index": 6,
-    "old_page": null,
-    "new_page": 0,
-    "word_diff": []
-  },
-  {
-    "block_type": "paragraph",
-    "change": "added",
-    "old_index": null,
-    "new_index": 7,
-    "old_page": null,
-    "new_page": 0,
-    "word_diff": []
-  },
-  {
-    "block_type": "paragraph",
-    "change": "added",
-    "old_index": null,
-    "new_index": 8,
-    "old_page": null,
-    "new_page": 1,
-    "word_diff": []
-  },
-  {
-    "block_type": "paragraph",
-    "change": "added",
-    "old_index": null,
-    "new_index": 9,
-    "old_page": null,
-    "new_page": 1,
-    "word_diff": []
-  },
-  {
-    "block_type": "paragraph",
-    "change": "added",
-    "old_index": null,
-    "new_index": 10,
-    "old_page": null,
-    "new_page": 1,
-    "word_diff": []
-  },
-  {
-    "block_type": "paragraph",
-    "change": "deleted",
-    "old_index": 1,
-    "new_index": null,
-    "old_page": 0,
-    "new_page": null,
-    "word_diff": []
-  },
-  {
-    "block_type": "paragraph",
-    "change": "deleted",
-    "old_index": 3,
-    "new_index": null,
-    "old_page": 0,
-    "new_page": null,
-    "word_diff": []
-  },
-  {
-    "block_type": "paragraph",
-    "change": "deleted",
-    "old_index": 4,
-    "new_index": null,
-    "old_page": 0,
-    "new_page": null,
-    "word_diff": []
-  },
-  {
-    "block_type": "paragraph",
-    "change": "deleted",
-    "old_index": 5,
-    "new_index": null,
-    "old_page": 0,
-    "new_page": null,
-    "word_diff": []
-  },
-  {
-    "block_type": "paragraph",
-    "change": "deleted",
-    "old_index": 6,
-    "new_index": null,
-    "old_page": 0,
-    "new_page": null,
-    "word_diff": []
-  },
-  {
-    "block_type": "paragraph",
-    "change": "deleted",
-    "old_index": 7,
-    "new_index": null,
-    "old_page": 0,
-    "new_page": null,
-    "word_diff": []
-  },
-  {
-    "block_type": "paragraph",
-    "change": "deleted",
-    "old_index": 8,
-    "new_index": null,
-    "old_page": 0,
-    "new_page": null,
-    "word_diff": []
-  },
-  {
-    "block_type": "paragraph",
-    "change": "deleted",
-    "old_index": 9,
-    "new_index": null,
-    "old_page": 0,
-    "new_page": null,
-    "word_diff": []
-  },
-  {
-    "block_type": "paragraph",
-    "change": "deleted",
-    "old_index": 10,
-    "new_index": null,
-    "old_page": 0,
-    "new_page": null,
-    "word_diff": []
-  },
-  {
-    "block_type": "paragraph",
-    "change": "deleted",
-    "old_index": 11,
-    "new_index": null,
-    "old_page": 0,
-    "new_page": null,
-    "word_diff": []
-  },
-  {
-    "block_type": "paragraph",
-    "change": "deleted",
-    "old_index": 12,
-    "new_index": null,
-    "old_page": 0,
-    "new_page": null,
-    "word_diff": []
-  },
-  {
-    "block_type": "paragraph",
-    "change": "deleted",
-    "old_index": 13,
-    "new_index": null,
-    "old_page": 0,
-    "new_page": null,
-    "word_diff": []
-  },
-  {
-    "block_type": "paragraph",
-    "change": "deleted",
-    "old_index": 14,
-    "new_index": null,
-    "old_page": 0,
-    "new_page": null,
-    "word_diff": []
-  },
-  {
-    "block_type": "paragraph",
-    "change": "deleted",
-    "old_index": 15,
-    "new_index": null,
-    "old_page": 0,
-    "new_page": null,
-    "word_diff": []
-  },
-  {
-    "block_type": "paragraph",
-    "change": "modified",
+    "change": "unchanged",
     "old_index": 0,
     "new_index": 0,
     "old_page": 0,
@@ -268,62 +16,4430 @@
         "value": "MALLIK"
       },
       {
-        "type": "delete",
-        "value": "Portfolio:mallik.tech"
-      },
-      {
-        "type": "insert",
+        "type": "equal",
         "value": "Portfolio"
       }
     ]
   },
   {
     "block_type": "paragraph",
-    "change": "modified",
+    "change": "unchanged",
+    "old_index": 1,
+    "new_index": 1,
+    "old_page": 0,
+    "new_page": 0,
+    "word_diff": [
+      {
+        "type": "equal",
+        "value": "GitHub"
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "unchanged",
     "old_index": 2,
     "new_index": 2,
     "old_page": 0,
     "new_page": 0,
     "word_diff": [
       {
-        "type": "delete",
-        "value": "Kolkata,India•+917596880082•mun.cosmos004@outlook.com"
-      },
-      {
-        "type": "delete",
-        "value": "LinkedIn:linkedin.com/in/muntasir-mallik"
-      },
-      {
-        "type": "insert",
+        "type": "equal",
         "value": "Kolkata,"
       },
       {
-        "type": "insert",
+        "type": "equal",
         "value": "India"
       },
       {
-        "type": "insert",
+        "type": "equal",
         "value": "•"
       },
       {
-        "type": "insert",
+        "type": "equal",
         "value": "+91"
       },
       {
-        "type": "insert",
+        "type": "equal",
         "value": "7596880082"
       },
       {
-        "type": "insert",
+        "type": "equal",
         "value": "•"
       },
       {
-        "type": "insert",
+        "type": "equal",
         "value": "mun.cosmos004@outlook.com"
       },
       {
-        "type": "insert",
+        "type": "equal",
         "value": "LinkedIn"
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "modified",
+    "old_index": 3,
+    "new_index": 4,
+    "old_page": 0,
+    "new_page": 0,
+    "word_diff": [
+      {
+        "type": "equal",
+        "value": "EDUCATION"
+      },
+      {
+        "type": "equal",
+        "value": "Techno"
+      },
+      {
+        "type": "equal",
+        "value": "India"
+      },
+      {
+        "type": "equal",
+        "value": "University,"
+      },
+      {
+        "type": "equal",
+        "value": "India"
+      },
+      {
+        "type": "equal",
+        "value": "Jul"
+      },
+      {
+        "type": "equal",
+        "value": "2022"
+      },
+      {
+        "type": "delete",
+        "value": "-"
+      },
+      {
+        "type": "insert",
+        "value": "‐"
+      },
+      {
+        "type": "equal",
+        "value": "Jun"
+      },
+      {
+        "type": "equal",
+        "value": "2026"
+      },
+      {
+        "type": "equal",
+        "value": "Bachelors"
+      },
+      {
+        "type": "equal",
+        "value": "in"
+      },
+      {
+        "type": "equal",
+        "value": "Technology,"
+      },
+      {
+        "type": "equal",
+        "value": "Computer"
+      },
+      {
+        "type": "equal",
+        "value": "Science"
+      },
+      {
+        "type": "equal",
+        "value": "Engineering."
+      },
+      {
+        "type": "equal",
+        "value": "CGPA:"
+      },
+      {
+        "type": "equal",
+        "value": "8.5"
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "modified",
+    "old_index": 4,
+    "new_index": 5,
+    "old_page": 0,
+    "new_page": 0,
+    "word_diff": [
+      {
+        "type": "equal",
+        "value": "EXPERIENCE"
+      },
+      {
+        "type": "insert",
+        "value": "Quokka"
+      },
+      {
+        "type": "insert",
+        "value": "For"
+      },
+      {
+        "type": "insert",
+        "value": "Good,"
+      },
+      {
+        "type": "equal",
+        "value": "Lead"
+      },
+      {
+        "type": "equal",
+        "value": "Full"
+      },
+      {
+        "type": "equal",
+        "value": "Stack"
+      },
+      {
+        "type": "delete",
+        "value": "Developer,"
+      },
+      {
+        "type": "delete",
+        "value": "Quokka"
+      },
+      {
+        "type": "delete",
+        "value": "For"
+      },
+      {
+        "type": "delete",
+        "value": "Good"
+      },
+      {
+        "type": "insert",
+        "value": "Developer"
+      },
+      {
+        "type": "equal",
+        "value": "Jan"
+      },
+      {
+        "type": "equal",
+        "value": "2025"
+      },
+      {
+        "type": "delete",
+        "value": "-"
+      },
+      {
+        "type": "delete",
+        "value": "Present"
+      },
+      {
+        "type": "insert",
+        "value": "‐"
+      },
+      {
+        "type": "insert",
+        "value": "Aug"
+      },
+      {
+        "type": "insert",
+        "value": "2025"
+      },
+      {
+        "type": "equal",
+        "value": "Part"
+      },
+      {
+        "type": "equal",
+        "value": "Time"
+      },
+      {
+        "type": "equal",
+        "value": "Remote,"
+      },
+      {
+        "type": "equal",
+        "value": "United"
+      },
+      {
+        "type": "equal",
+        "value": "States"
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "modified",
+    "old_index": 5,
+    "new_index": 6,
+    "old_page": 0,
+    "new_page": 0,
+    "word_diff": [
+      {
+        "type": "equal",
+        "value": "●"
+      },
+      {
+        "type": "equal",
+        "value": "Led"
+      },
+      {
+        "type": "equal",
+        "value": "development"
+      },
+      {
+        "type": "equal",
+        "value": "of"
+      },
+      {
+        "type": "equal",
+        "value": "a"
+      },
+      {
+        "type": "delete",
+        "value": "cross-platform"
+      },
+      {
+        "type": "insert",
+        "value": "cross‐platform"
+      },
+      {
+        "type": "equal",
+        "value": "email/newsletter"
+      },
+      {
+        "type": "equal",
+        "value": "reader,"
+      },
+      {
+        "type": "equal",
+        "value": "inbo.club"
+      },
+      {
+        "type": "equal",
+        "value": "for"
+      },
+      {
+        "type": "equal",
+        "value": "web,"
+      },
+      {
+        "type": "equal",
+        "value": "android"
+      },
+      {
+        "type": "equal",
+        "value": "and"
+      },
+      {
+        "type": "equal",
+        "value": "iOS,"
+      },
+      {
+        "type": "equal",
+        "value": "to"
+      },
+      {
+        "type": "equal",
+        "value": "serve"
+      },
+      {
+        "type": "equal",
+        "value": "over"
+      },
+      {
+        "type": "equal",
+        "value": "10,000"
+      },
+      {
+        "type": "equal",
+        "value": "users"
+      },
+      {
+        "type": "equal",
+        "value": "with"
+      },
+      {
+        "type": "equal",
+        "value": "inbox"
+      },
+      {
+        "type": "equal",
+        "value": "syncing"
+      },
+      {
+        "type": "equal",
+        "value": "and"
+      },
+      {
+        "type": "equal",
+        "value": "modular"
+      },
+      {
+        "type": "equal",
+        "value": "UI"
+      },
+      {
+        "type": "equal",
+        "value": "architecture"
+      },
+      {
+        "type": "equal",
+        "value": "using"
+      },
+      {
+        "type": "equal",
+        "value": "Next.js"
+      },
+      {
+        "type": "equal",
+        "value": "and"
+      },
+      {
+        "type": "equal",
+        "value": "React"
+      },
+      {
+        "type": "equal",
+        "value": "Native,"
+      },
+      {
+        "type": "equal",
+        "value": "reducing"
+      },
+      {
+        "type": "equal",
+        "value": "production"
+      },
+      {
+        "type": "equal",
+        "value": "time"
+      },
+      {
+        "type": "equal",
+        "value": "by"
+      },
+      {
+        "type": "equal",
+        "value": "25%."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "deleted",
+    "old_index": 6,
+    "new_index": null,
+    "old_page": 0,
+    "new_page": null,
+    "word_diff": [
+      {
+        "type": "delete",
+        "value": "●"
+      },
+      {
+        "type": "delete",
+        "value": "Collaborated"
+      },
+      {
+        "type": "delete",
+        "value": "with"
+      },
+      {
+        "type": "delete",
+        "value": "designers"
+      },
+      {
+        "type": "delete",
+        "value": "and"
+      },
+      {
+        "type": "delete",
+        "value": "5+"
+      },
+      {
+        "type": "delete",
+        "value": "testers"
+      },
+      {
+        "type": "delete",
+        "value": "to"
+      },
+      {
+        "type": "delete",
+        "value": "ensure"
+      },
+      {
+        "type": "delete",
+        "value": "visual"
+      },
+      {
+        "type": "delete",
+        "value": "consistency"
+      },
+      {
+        "type": "delete",
+        "value": "and"
+      },
+      {
+        "type": "delete",
+        "value": "complete"
+      },
+      {
+        "type": "delete",
+        "value": "flow"
+      },
+      {
+        "type": "delete",
+        "value": "coverage,"
+      },
+      {
+        "type": "delete",
+        "value": "reducing"
+      },
+      {
+        "type": "delete",
+        "value": "rework"
+      },
+      {
+        "type": "delete",
+        "value": "by"
+      },
+      {
+        "type": "delete",
+        "value": "20%."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "added",
+    "old_index": null,
+    "new_index": 3,
+    "old_page": null,
+    "new_page": 0,
+    "word_diff": [
+      {
+        "type": "insert",
+        "value": "SUMMARY"
+      },
+      {
+        "type": "insert",
+        "value": "Full"
+      },
+      {
+        "type": "insert",
+        "value": "Stack"
+      },
+      {
+        "type": "insert",
+        "value": "Engineer"
+      },
+      {
+        "type": "insert",
+        "value": "(2"
+      },
+      {
+        "type": "insert",
+        "value": "years)"
+      },
+      {
+        "type": "insert",
+        "value": "focused"
+      },
+      {
+        "type": "insert",
+        "value": "on"
+      },
+      {
+        "type": "insert",
+        "value": "building"
+      },
+      {
+        "type": "insert",
+        "value": "performant,"
+      },
+      {
+        "type": "insert",
+        "value": "scalable"
+      },
+      {
+        "type": "insert",
+        "value": "applications"
+      },
+      {
+        "type": "insert",
+        "value": "with"
+      },
+      {
+        "type": "insert",
+        "value": "React,"
+      },
+      {
+        "type": "insert",
+        "value": "Node,"
+      },
+      {
+        "type": "insert",
+        "value": "Python"
+      },
+      {
+        "type": "insert",
+        "value": "and"
+      },
+      {
+        "type": "insert",
+        "value": "LLM‐based"
+      },
+      {
+        "type": "insert",
+        "value": "systems."
+      },
+      {
+        "type": "insert",
+        "value": "Experienced"
+      },
+      {
+        "type": "insert",
+        "value": "in"
+      },
+      {
+        "type": "insert",
+        "value": "leading"
+      },
+      {
+        "type": "insert",
+        "value": "and"
+      },
+      {
+        "type": "insert",
+        "value": "contributing"
+      },
+      {
+        "type": "insert",
+        "value": "to"
+      },
+      {
+        "type": "insert",
+        "value": "real‐world"
+      },
+      {
+        "type": "insert",
+        "value": "AI"
+      },
+      {
+        "type": "insert",
+        "value": "products"
+      },
+      {
+        "type": "insert",
+        "value": "and"
+      },
+      {
+        "type": "insert",
+        "value": "open‐source"
+      },
+      {
+        "type": "insert",
+        "value": "initiatives."
+      },
+      {
+        "type": "insert",
+        "value": "I"
+      },
+      {
+        "type": "insert",
+        "value": "thrive"
+      },
+      {
+        "type": "insert",
+        "value": "in"
+      },
+      {
+        "type": "insert",
+        "value": "fast‐paced"
+      },
+      {
+        "type": "insert",
+        "value": "teams"
+      },
+      {
+        "type": "insert",
+        "value": "and"
+      },
+      {
+        "type": "insert",
+        "value": "enjoy"
+      },
+      {
+        "type": "insert",
+        "value": "turning"
+      },
+      {
+        "type": "insert",
+        "value": "product"
+      },
+      {
+        "type": "insert",
+        "value": "ideas"
+      },
+      {
+        "type": "insert",
+        "value": "into"
+      },
+      {
+        "type": "insert",
+        "value": "robust"
+      },
+      {
+        "type": "insert",
+        "value": "solutions."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "unchanged",
+    "old_index": 7,
+    "new_index": 7,
+    "old_page": 0,
+    "new_page": 0,
+    "word_diff": [
+      {
+        "type": "equal",
+        "value": "●"
+      },
+      {
+        "type": "equal",
+        "value": "Engineered"
+      },
+      {
+        "type": "equal",
+        "value": "email"
+      },
+      {
+        "type": "equal",
+        "value": "processing"
+      },
+      {
+        "type": "equal",
+        "value": "infrastructure"
+      },
+      {
+        "type": "equal",
+        "value": "using"
+      },
+      {
+        "type": "equal",
+        "value": "Postfix,"
+      },
+      {
+        "type": "equal",
+        "value": "Amazon"
+      },
+      {
+        "type": "equal",
+        "value": "SES,"
+      },
+      {
+        "type": "equal",
+        "value": "and"
+      },
+      {
+        "type": "equal",
+        "value": "Gmail"
+      },
+      {
+        "type": "equal",
+        "value": "API,"
+      },
+      {
+        "type": "equal",
+        "value": "processing"
+      },
+      {
+        "type": "equal",
+        "value": "200,000+"
+      },
+      {
+        "type": "equal",
+        "value": "emails/month"
+      },
+      {
+        "type": "equal",
+        "value": "through"
+      },
+      {
+        "type": "equal",
+        "value": "serverless"
+      },
+      {
+        "type": "equal",
+        "value": "pipelines"
+      },
+      {
+        "type": "equal",
+        "value": "using"
+      },
+      {
+        "type": "equal",
+        "value": "Azure"
+      },
+      {
+        "type": "equal",
+        "value": "Functions,"
+      },
+      {
+        "type": "equal",
+        "value": "Blob"
+      },
+      {
+        "type": "equal",
+        "value": "Storage,"
+      },
+      {
+        "type": "equal",
+        "value": "and"
+      },
+      {
+        "type": "equal",
+        "value": "Azure"
+      },
+      {
+        "type": "equal",
+        "value": "Files."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "modified",
+    "old_index": 8,
+    "new_index": 8,
+    "old_page": 0,
+    "new_page": 0,
+    "word_diff": [
+      {
+        "type": "equal",
+        "value": "●"
+      },
+      {
+        "type": "equal",
+        "value": "Delivered"
+      },
+      {
+        "type": "equal",
+        "value": "a"
+      },
+      {
+        "type": "equal",
+        "value": "streaming"
+      },
+      {
+        "type": "equal",
+        "value": "response"
+      },
+      {
+        "type": "equal",
+        "value": "experience"
+      },
+      {
+        "type": "equal",
+        "value": "for"
+      },
+      {
+        "type": "equal",
+        "value": "newsletter"
+      },
+      {
+        "type": "equal",
+        "value": "summaries"
+      },
+      {
+        "type": "equal",
+        "value": "to"
+      },
+      {
+        "type": "equal",
+        "value": "reduce"
+      },
+      {
+        "type": "equal",
+        "value": "bounce"
+      },
+      {
+        "type": "equal",
+        "value": "rate"
+      },
+      {
+        "type": "equal",
+        "value": "by"
+      },
+      {
+        "type": "equal",
+        "value": "50%;"
+      },
+      {
+        "type": "delete",
+        "value": "collected"
+      },
+      {
+        "type": "delete",
+        "value": "and"
+      },
+      {
+        "type": "delete",
+        "value": "analyzed"
+      },
+      {
+        "type": "insert",
+        "value": "structured"
+      },
+      {
+        "type": "equal",
+        "value": "user"
+      },
+      {
+        "type": "delete",
+        "value": "interaction"
+      },
+      {
+        "type": "delete",
+        "value": "data"
+      },
+      {
+        "type": "delete",
+        "value": "to"
+      },
+      {
+        "type": "delete",
+        "value": "support"
+      },
+      {
+        "type": "delete",
+        "value": "future"
+      },
+      {
+        "type": "delete",
+        "value": "monetization"
+      },
+      {
+        "type": "delete",
+        "value": "strategies."
+      },
+      {
+        "type": "insert",
+        "value": "reading"
+      },
+      {
+        "type": "insert",
+        "value": "habits"
+      },
+      {
+        "type": "insert",
+        "value": "for"
+      },
+      {
+        "type": "insert",
+        "value": "30%"
+      },
+      {
+        "type": "insert",
+        "value": "increase"
+      },
+      {
+        "type": "insert",
+        "value": "in"
+      },
+      {
+        "type": "insert",
+        "value": "revenue."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "modified",
+    "old_index": 9,
+    "new_index": 9,
+    "old_page": 0,
+    "new_page": 0,
+    "word_diff": [
+      {
+        "type": "equal",
+        "value": "●"
+      },
+      {
+        "type": "equal",
+        "value": "Designed"
+      },
+      {
+        "type": "delete",
+        "value": "memory-efficient"
+      },
+      {
+        "type": "insert",
+        "value": "memory‐efficient"
+      },
+      {
+        "type": "equal",
+        "value": "Docker"
+      },
+      {
+        "type": "equal",
+        "value": "containers"
+      },
+      {
+        "type": "equal",
+        "value": "and"
+      },
+      {
+        "type": "equal",
+        "value": "modular"
+      },
+      {
+        "type": "equal",
+        "value": "backend"
+      },
+      {
+        "type": "equal",
+        "value": "services,"
+      },
+      {
+        "type": "equal",
+        "value": "reducing"
+      },
+      {
+        "type": "delete",
+        "value": "in-house"
+      },
+      {
+        "type": "insert",
+        "value": "in‐house"
+      },
+      {
+        "type": "equal",
+        "value": "infrastructure"
+      },
+      {
+        "type": "equal",
+        "value": "costs"
+      },
+      {
+        "type": "equal",
+        "value": "across"
+      },
+      {
+        "type": "equal",
+        "value": "AWS,"
+      },
+      {
+        "type": "equal",
+        "value": "Azure,"
+      },
+      {
+        "type": "equal",
+        "value": "and"
+      },
+      {
+        "type": "equal",
+        "value": "DigitalOcean"
+      },
+      {
+        "type": "equal",
+        "value": "by"
+      },
+      {
+        "type": "equal",
+        "value": "30%;"
+      },
+      {
+        "type": "equal",
+        "value": "also"
+      },
+      {
+        "type": "equal",
+        "value": "included"
+      },
+      {
+        "type": "equal",
+        "value": "monitoring"
+      },
+      {
+        "type": "delete",
+        "value": "and"
+      },
+      {
+        "type": "delete",
+        "value": "system"
+      },
+      {
+        "type": "delete",
+        "value": "health"
+      },
+      {
+        "type": "delete",
+        "value": "checks"
+      },
+      {
+        "type": "equal",
+        "value": "to"
+      },
+      {
+        "type": "equal",
+        "value": "support"
+      },
+      {
+        "type": "delete",
+        "value": "production"
+      },
+      {
+        "type": "equal",
+        "value": "stability."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "modified",
+    "old_index": 10,
+    "new_index": 10,
+    "old_page": 0,
+    "new_page": 0,
+    "word_diff": [
+      {
+        "type": "equal",
+        "value": "●"
+      },
+      {
+        "type": "equal",
+        "value": "Created"
+      },
+      {
+        "type": "equal",
+        "value": "Newslettermart.com,"
+      },
+      {
+        "type": "equal",
+        "value": "a"
+      },
+      {
+        "type": "equal",
+        "value": "B2B"
+      },
+      {
+        "type": "delete",
+        "value": "chat-driven"
+      },
+      {
+        "type": "insert",
+        "value": "chat‐driven"
+      },
+      {
+        "type": "equal",
+        "value": "platform"
+      },
+      {
+        "type": "equal",
+        "value": "enabling"
+      },
+      {
+        "type": "delete",
+        "value": "seamless"
+      },
+      {
+        "type": "equal",
+        "value": "ownership"
+      },
+      {
+        "type": "equal",
+        "value": "transfers"
+      },
+      {
+        "type": "equal",
+        "value": "of"
+      },
+      {
+        "type": "equal",
+        "value": "newsletter"
+      },
+      {
+        "type": "equal",
+        "value": "businesses,"
+      },
+      {
+        "type": "equal",
+        "value": "with"
+      },
+      {
+        "type": "equal",
+        "value": "integrated"
+      },
+      {
+        "type": "delete",
+        "value": "polling-based"
+      },
+      {
+        "type": "delete",
+        "value": "messaging."
+      },
+      {
+        "type": "insert",
+        "value": "polling‐based"
+      },
+      {
+        "type": "insert",
+        "value": "messaging"
+      },
+      {
+        "type": "insert",
+        "value": "for"
+      },
+      {
+        "type": "insert",
+        "value": "a"
+      },
+      {
+        "type": "insert",
+        "value": "20%"
+      },
+      {
+        "type": "insert",
+        "value": "higher"
+      },
+      {
+        "type": "insert",
+        "value": "conversion"
+      },
+      {
+        "type": "insert",
+        "value": "rate."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "deleted",
+    "old_index": 11,
+    "new_index": null,
+    "old_page": 0,
+    "new_page": null,
+    "word_diff": [
+      {
+        "type": "delete",
+        "value": "Full"
+      },
+      {
+        "type": "delete",
+        "value": "Stack"
+      },
+      {
+        "type": "delete",
+        "value": "Developer,"
+      },
+      {
+        "type": "delete",
+        "value": "Open"
+      },
+      {
+        "type": "delete",
+        "value": "Source"
+      },
+      {
+        "type": "delete",
+        "value": "Oct"
+      },
+      {
+        "type": "delete",
+        "value": "2023"
+      },
+      {
+        "type": "delete",
+        "value": "-"
+      },
+      {
+        "type": "delete",
+        "value": "Present"
+      },
+      {
+        "type": "delete",
+        "value": "Part"
+      },
+      {
+        "type": "delete",
+        "value": "Time"
+      },
+      {
+        "type": "delete",
+        "value": "Remote"
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "deleted",
+    "old_index": 12,
+    "new_index": null,
+    "old_page": 0,
+    "new_page": null,
+    "word_diff": [
+      {
+        "type": "delete",
+        "value": "●"
+      },
+      {
+        "type": "delete",
+        "value": "Google"
+      },
+      {
+        "type": "delete",
+        "value": "Summer"
+      },
+      {
+        "type": "delete",
+        "value": "of"
+      },
+      {
+        "type": "delete",
+        "value": "Code"
+      },
+      {
+        "type": "delete",
+        "value": "–"
+      },
+      {
+        "type": "delete",
+        "value": "AOSSIE.org,"
+      },
+      {
+        "type": "delete",
+        "value": "○"
+      },
+      {
+        "type": "delete",
+        "value": "Discussed"
+      },
+      {
+        "type": "delete",
+        "value": "with"
+      },
+      {
+        "type": "delete",
+        "value": "5+"
+      },
+      {
+        "type": "delete",
+        "value": "global"
+      },
+      {
+        "type": "delete",
+        "value": "contributors"
+      },
+      {
+        "type": "delete",
+        "value": "to"
+      },
+      {
+        "type": "delete",
+        "value": "define"
+      },
+      {
+        "type": "delete",
+        "value": "system"
+      },
+      {
+        "type": "delete",
+        "value": "design,"
+      },
+      {
+        "type": "delete",
+        "value": "LLM"
+      },
+      {
+        "type": "delete",
+        "value": "workflows,"
+      },
+      {
+        "type": "delete",
+        "value": "and"
+      },
+      {
+        "type": "delete",
+        "value": "modular"
+      },
+      {
+        "type": "delete",
+        "value": "structure."
+      },
+      {
+        "type": "delete",
+        "value": "○"
+      },
+      {
+        "type": "delete",
+        "value": "Constructed"
+      },
+      {
+        "type": "delete",
+        "value": "a"
+      },
+      {
+        "type": "delete",
+        "value": "Retrieval-Augmented"
+      },
+      {
+        "type": "delete",
+        "value": "Generation"
+      },
+      {
+        "type": "delete",
+        "value": "(RAG)"
+      },
+      {
+        "type": "delete",
+        "value": "module"
+      },
+      {
+        "type": "delete",
+        "value": "using"
+      },
+      {
+        "type": "delete",
+        "value": "vector-based"
+      },
+      {
+        "type": "delete",
+        "value": "search"
+      },
+      {
+        "type": "delete",
+        "value": "and"
+      },
+      {
+        "type": "delete",
+        "value": "LLM"
+      },
+      {
+        "type": "delete",
+        "value": "integration,"
+      },
+      {
+        "type": "delete",
+        "value": "following"
+      },
+      {
+        "type": "delete",
+        "value": "an"
+      },
+      {
+        "type": "delete",
+        "value": "event-driven"
+      },
+      {
+        "type": "delete",
+        "value": "architecture."
+      },
+      {
+        "type": "delete",
+        "value": "○"
+      },
+      {
+        "type": "delete",
+        "value": "Engineered"
+      },
+      {
+        "type": "delete",
+        "value": "a"
+      },
+      {
+        "type": "delete",
+        "value": "real-time"
+      },
+      {
+        "type": "delete",
+        "value": "messaging"
+      },
+      {
+        "type": "delete",
+        "value": "FastAPI"
+      },
+      {
+        "type": "delete",
+        "value": "backend"
+      },
+      {
+        "type": "delete",
+        "value": "using"
+      },
+      {
+        "type": "delete",
+        "value": "WebSocket"
+      },
+      {
+        "type": "delete",
+        "value": "(Pub/Sub)"
+      },
+      {
+        "type": "delete",
+        "value": "and"
+      },
+      {
+        "type": "delete",
+        "value": "WebRTC,"
+      },
+      {
+        "type": "delete",
+        "value": "enabling"
+      },
+      {
+        "type": "delete",
+        "value": "low-latency"
+      },
+      {
+        "type": "delete",
+        "value": "communication"
+      },
+      {
+        "type": "delete",
+        "value": "with"
+      },
+      {
+        "type": "delete",
+        "value": "sent,"
+      },
+      {
+        "type": "delete",
+        "value": "delivered,"
+      },
+      {
+        "type": "delete",
+        "value": "and"
+      },
+      {
+        "type": "delete",
+        "value": "seen"
+      },
+      {
+        "type": "delete",
+        "value": "status"
+      },
+      {
+        "type": "delete",
+        "value": "tracking."
+      },
+      {
+        "type": "delete",
+        "value": "○"
+      },
+      {
+        "type": "delete",
+        "value": "Built"
+      },
+      {
+        "type": "delete",
+        "value": "the"
+      },
+      {
+        "type": "delete",
+        "value": "chat"
+      },
+      {
+        "type": "delete",
+        "value": "interface"
+      },
+      {
+        "type": "delete",
+        "value": "with"
+      },
+      {
+        "type": "delete",
+        "value": "real-time"
+      },
+      {
+        "type": "delete",
+        "value": "rendering,"
+      },
+      {
+        "type": "delete",
+        "value": "user"
+      },
+      {
+        "type": "delete",
+        "value": "search,"
+      },
+      {
+        "type": "delete",
+        "value": "and"
+      },
+      {
+        "type": "delete",
+        "value": "presence"
+      },
+      {
+        "type": "delete",
+        "value": "indicators,"
+      },
+      {
+        "type": "delete",
+        "value": "using"
+      },
+      {
+        "type": "delete",
+        "value": "Redis-cached"
+      },
+      {
+        "type": "delete",
+        "value": "last"
+      },
+      {
+        "type": "delete",
+        "value": "seen"
+      },
+      {
+        "type": "delete",
+        "value": "and"
+      },
+      {
+        "type": "delete",
+        "value": "infinite"
+      },
+      {
+        "type": "delete",
+        "value": "scroll"
+      },
+      {
+        "type": "delete",
+        "value": "for"
+      },
+      {
+        "type": "delete",
+        "value": "smooth"
+      },
+      {
+        "type": "delete",
+        "value": "history"
+      },
+      {
+        "type": "delete",
+        "value": "loading."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "deleted",
+    "old_index": 13,
+    "new_index": null,
+    "old_page": 0,
+    "new_page": null,
+    "word_diff": [
+      {
+        "type": "delete",
+        "value": "●"
+      },
+      {
+        "type": "delete",
+        "value": "Google"
+      },
+      {
+        "type": "delete",
+        "value": "Summer"
+      },
+      {
+        "type": "delete",
+        "value": "of"
+      },
+      {
+        "type": "delete",
+        "value": "Code"
+      },
+      {
+        "type": "delete",
+        "value": "–"
+      },
+      {
+        "type": "delete",
+        "value": "C2SI.org,"
+      },
+      {
+        "type": "delete",
+        "value": "○"
+      },
+      {
+        "type": "delete",
+        "value": "Enhanced"
+      },
+      {
+        "type": "delete",
+        "value": "real-time"
+      },
+      {
+        "type": "delete",
+        "value": "collaboration"
+      },
+      {
+        "type": "delete",
+        "value": "features"
+      },
+      {
+        "type": "delete",
+        "value": "by"
+      },
+      {
+        "type": "delete",
+        "value": "optimizing"
+      },
+      {
+        "type": "delete",
+        "value": "Firestore-based"
+      },
+      {
+        "type": "delete",
+        "value": "user"
+      },
+      {
+        "type": "delete",
+        "value": "updates"
+      },
+      {
+        "type": "delete",
+        "value": "and"
+      },
+      {
+        "type": "delete",
+        "value": "restructuring"
+      },
+      {
+        "type": "delete",
+        "value": "the"
+      },
+      {
+        "type": "delete",
+        "value": "nested"
+      },
+      {
+        "type": "delete",
+        "value": "comment"
+      },
+      {
+        "type": "delete",
+        "value": "system,"
+      },
+      {
+        "type": "delete",
+        "value": "improving"
+      },
+      {
+        "type": "delete",
+        "value": "consistency,"
+      },
+      {
+        "type": "delete",
+        "value": "and"
+      },
+      {
+        "type": "delete",
+        "value": "threading"
+      },
+      {
+        "type": "delete",
+        "value": "stability"
+      },
+      {
+        "type": "delete",
+        "value": "by"
+      },
+      {
+        "type": "delete",
+        "value": "80%."
+      },
+      {
+        "type": "delete",
+        "value": "○"
+      },
+      {
+        "type": "delete",
+        "value": "Containerized"
+      },
+      {
+        "type": "delete",
+        "value": "the"
+      },
+      {
+        "type": "delete",
+        "value": "local"
+      },
+      {
+        "type": "delete",
+        "value": "development"
+      },
+      {
+        "type": "delete",
+        "value": "environment"
+      },
+      {
+        "type": "delete",
+        "value": "using"
+      },
+      {
+        "type": "delete",
+        "value": "Docker,"
+      },
+      {
+        "type": "delete",
+        "value": "reducing"
+      },
+      {
+        "type": "delete",
+        "value": "contributor"
+      },
+      {
+        "type": "delete",
+        "value": "setup"
+      },
+      {
+        "type": "delete",
+        "value": "time"
+      },
+      {
+        "type": "delete",
+        "value": "by"
+      },
+      {
+        "type": "delete",
+        "value": "~50%"
+      },
+      {
+        "type": "delete",
+        "value": "and"
+      },
+      {
+        "type": "delete",
+        "value": "improving"
+      },
+      {
+        "type": "delete",
+        "value": "cross-system"
+      },
+      {
+        "type": "delete",
+        "value": "consistency."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "modified",
+    "old_index": 14,
+    "new_index": 14,
+    "old_page": 0,
+    "new_page": 0,
+    "word_diff": [
+      {
+        "type": "insert",
+        "value": "Keyshade.xyz,"
+      },
+      {
+        "type": "equal",
+        "value": "Backend"
+      },
+      {
+        "type": "delete",
+        "value": "Developer,"
+      },
+      {
+        "type": "delete",
+        "value": "Keyshade.xyz"
+      },
+      {
+        "type": "insert",
+        "value": "Developer"
+      },
+      {
+        "type": "equal",
+        "value": "Nov"
+      },
+      {
+        "type": "equal",
+        "value": "2024"
+      },
+      {
+        "type": "delete",
+        "value": "-"
+      },
+      {
+        "type": "insert",
+        "value": "‐"
+      },
+      {
+        "type": "equal",
+        "value": "Jan"
+      },
+      {
+        "type": "equal",
+        "value": "2025"
+      },
+      {
+        "type": "equal",
+        "value": "Internship"
+      },
+      {
+        "type": "equal",
+        "value": "Remote,"
+      },
+      {
+        "type": "equal",
+        "value": "Kolkata"
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "deleted",
+    "old_index": 15,
+    "new_index": null,
+    "old_page": 0,
+    "new_page": null,
+    "word_diff": [
+      {
+        "type": "delete",
+        "value": "●"
+      },
+      {
+        "type": "delete",
+        "value": "Proposed"
+      },
+      {
+        "type": "delete",
+        "value": "a"
+      },
+      {
+        "type": "delete",
+        "value": "new"
+      },
+      {
+        "type": "delete",
+        "value": "feature"
+      },
+      {
+        "type": "delete",
+        "value": "in"
+      },
+      {
+        "type": "delete",
+        "value": "the"
+      },
+      {
+        "type": "delete",
+        "value": "CLI,"
+      },
+      {
+        "type": "delete",
+        "value": "enabling"
+      },
+      {
+        "type": "delete",
+        "value": "users"
+      },
+      {
+        "type": "delete",
+        "value": "to"
+      },
+      {
+        "type": "delete",
+        "value": "seamlessly"
+      },
+      {
+        "type": "delete",
+        "value": "upload"
+      },
+      {
+        "type": "delete",
+        "value": "secrets"
+      },
+      {
+        "type": "delete",
+        "value": "directly"
+      },
+      {
+        "type": "delete",
+        "value": "from"
+      },
+      {
+        "type": "delete",
+        "value": "the"
+      },
+      {
+        "type": "delete",
+        "value": "`.env`"
+      },
+      {
+        "type": "delete",
+        "value": "file."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "modified",
+    "old_index": 16,
+    "new_index": 16,
+    "old_page": 0,
+    "new_page": 0,
+    "word_diff": [
+      {
+        "type": "equal",
+        "value": "●"
+      },
+      {
+        "type": "delete",
+        "value": "Enhanced"
+      },
+      {
+        "type": "insert",
+        "value": "Extended"
+      },
+      {
+        "type": "equal",
+        "value": "API"
+      },
+      {
+        "type": "equal",
+        "value": "client"
+      },
+      {
+        "type": "equal",
+        "value": "package"
+      },
+      {
+        "type": "equal",
+        "value": "by"
+      },
+      {
+        "type": "equal",
+        "value": "introducing"
+      },
+      {
+        "type": "equal",
+        "value": "a"
+      },
+      {
+        "type": "equal",
+        "value": "module"
+      },
+      {
+        "type": "equal",
+        "value": "controller,"
+      },
+      {
+        "type": "equal",
+        "value": "enabling"
+      },
+      {
+        "type": "equal",
+        "value": "the"
+      },
+      {
+        "type": "equal",
+        "value": "frontend"
+      },
+      {
+        "type": "equal",
+        "value": "to"
+      },
+      {
+        "type": "equal",
+        "value": "interact"
+      },
+      {
+        "type": "equal",
+        "value": "directly"
+      },
+      {
+        "type": "equal",
+        "value": "with"
+      },
+      {
+        "type": "equal",
+        "value": "the"
+      },
+      {
+        "type": "equal",
+        "value": "backend"
+      },
+      {
+        "type": "equal",
+        "value": "without"
+      },
+      {
+        "type": "equal",
+        "value": "explicitly"
+      },
+      {
+        "type": "equal",
+        "value": "calling"
+      },
+      {
+        "type": "equal",
+        "value": "endpoints."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "modified",
+    "old_index": 17,
+    "new_index": 17,
+    "old_page": 0,
+    "new_page": 0,
+    "word_diff": [
+      {
+        "type": "equal",
+        "value": "●"
+      },
+      {
+        "type": "equal",
+        "value": "Created"
+      },
+      {
+        "type": "equal",
+        "value": "a"
+      },
+      {
+        "type": "equal",
+        "value": "Next.js"
+      },
+      {
+        "type": "equal",
+        "value": "app"
+      },
+      {
+        "type": "equal",
+        "value": "to"
+      },
+      {
+        "type": "equal",
+        "value": "efficiently"
+      },
+      {
+        "type": "equal",
+        "value": "scan"
+      },
+      {
+        "type": "equal",
+        "value": "for"
+      },
+      {
+        "type": "equal",
+        "value": "secrets"
+      },
+      {
+        "type": "equal",
+        "value": "leaked"
+      },
+      {
+        "type": "equal",
+        "value": "in"
+      },
+      {
+        "type": "equal",
+        "value": "GitHub"
+      },
+      {
+        "type": "equal",
+        "value": "repositories"
+      },
+      {
+        "type": "equal",
+        "value": "with"
+      },
+      {
+        "type": "delete",
+        "value": "HTTP-streaming"
+      },
+      {
+        "type": "insert",
+        "value": "HTTP‐streaming"
+      },
+      {
+        "type": "equal",
+        "value": "response."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "added",
+    "old_index": null,
+    "new_index": 11,
+    "old_page": null,
+    "new_page": 0,
+    "word_diff": [
+      {
+        "type": "insert",
+        "value": "Open"
+      },
+      {
+        "type": "insert",
+        "value": "Source,"
+      },
+      {
+        "type": "insert",
+        "value": "Full"
+      },
+      {
+        "type": "insert",
+        "value": "Stack"
+      },
+      {
+        "type": "insert",
+        "value": "Developer"
+      },
+      {
+        "type": "insert",
+        "value": "Oct"
+      },
+      {
+        "type": "insert",
+        "value": "2023"
+      },
+      {
+        "type": "insert",
+        "value": "‐"
+      },
+      {
+        "type": "insert",
+        "value": "May"
+      },
+      {
+        "type": "insert",
+        "value": "2025"
+      },
+      {
+        "type": "insert",
+        "value": "Part"
+      },
+      {
+        "type": "insert",
+        "value": "Time"
+      },
+      {
+        "type": "insert",
+        "value": "Remote"
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "added",
+    "old_index": null,
+    "new_index": 12,
+    "old_page": null,
+    "new_page": 0,
+    "word_diff": [
+      {
+        "type": "insert",
+        "value": "●"
+      },
+      {
+        "type": "insert",
+        "value": "Google"
+      },
+      {
+        "type": "insert",
+        "value": "Summer"
+      },
+      {
+        "type": "insert",
+        "value": "of"
+      },
+      {
+        "type": "insert",
+        "value": "Code"
+      },
+      {
+        "type": "insert",
+        "value": "–"
+      },
+      {
+        "type": "insert",
+        "value": "AOSSIE.org,"
+      },
+      {
+        "type": "insert",
+        "value": "○"
+      },
+      {
+        "type": "insert",
+        "value": "Collaborated"
+      },
+      {
+        "type": "insert",
+        "value": "with"
+      },
+      {
+        "type": "insert",
+        "value": "5+"
+      },
+      {
+        "type": "insert",
+        "value": "global"
+      },
+      {
+        "type": "insert",
+        "value": "contributors"
+      },
+      {
+        "type": "insert",
+        "value": "to"
+      },
+      {
+        "type": "insert",
+        "value": "define"
+      },
+      {
+        "type": "insert",
+        "value": "system"
+      },
+      {
+        "type": "insert",
+        "value": "design,"
+      },
+      {
+        "type": "insert",
+        "value": "LLM"
+      },
+      {
+        "type": "insert",
+        "value": "workflows,"
+      },
+      {
+        "type": "insert",
+        "value": "and"
+      },
+      {
+        "type": "insert",
+        "value": "modular"
+      },
+      {
+        "type": "insert",
+        "value": "structure."
+      },
+      {
+        "type": "insert",
+        "value": "○"
+      },
+      {
+        "type": "insert",
+        "value": "Implemented"
+      },
+      {
+        "type": "insert",
+        "value": "a"
+      },
+      {
+        "type": "insert",
+        "value": "Retrieval‐Augmented"
+      },
+      {
+        "type": "insert",
+        "value": "Generation"
+      },
+      {
+        "type": "insert",
+        "value": "(RAG)"
+      },
+      {
+        "type": "insert",
+        "value": "module"
+      },
+      {
+        "type": "insert",
+        "value": "using"
+      },
+      {
+        "type": "insert",
+        "value": "vector‐based"
+      },
+      {
+        "type": "insert",
+        "value": "search"
+      },
+      {
+        "type": "insert",
+        "value": "and"
+      },
+      {
+        "type": "insert",
+        "value": "LLM"
+      },
+      {
+        "type": "insert",
+        "value": "integration,"
+      },
+      {
+        "type": "insert",
+        "value": "following"
+      },
+      {
+        "type": "insert",
+        "value": "an"
+      },
+      {
+        "type": "insert",
+        "value": "event‐driven"
+      },
+      {
+        "type": "insert",
+        "value": "architecture"
+      },
+      {
+        "type": "insert",
+        "value": "for"
+      },
+      {
+        "type": "insert",
+        "value": "scalability."
+      },
+      {
+        "type": "insert",
+        "value": "○"
+      },
+      {
+        "type": "insert",
+        "value": "Engineered"
+      },
+      {
+        "type": "insert",
+        "value": "a"
+      },
+      {
+        "type": "insert",
+        "value": "WebSocket‐based"
+      },
+      {
+        "type": "insert",
+        "value": "messaging"
+      },
+      {
+        "type": "insert",
+        "value": "backend"
+      },
+      {
+        "type": "insert",
+        "value": "in"
+      },
+      {
+        "type": "insert",
+        "value": "FastAPI"
+      },
+      {
+        "type": "insert",
+        "value": "with"
+      },
+      {
+        "type": "insert",
+        "value": "Redis"
+      },
+      {
+        "type": "insert",
+        "value": "Pub/Sub"
+      },
+      {
+        "type": "insert",
+        "value": "and"
+      },
+      {
+        "type": "insert",
+        "value": "WebRTC,"
+      },
+      {
+        "type": "insert",
+        "value": "handling"
+      },
+      {
+        "type": "insert",
+        "value": "1000+"
+      },
+      {
+        "type": "insert",
+        "value": "concurrent"
+      },
+      {
+        "type": "insert",
+        "value": "users"
+      },
+      {
+        "type": "insert",
+        "value": "and"
+      },
+      {
+        "type": "insert",
+        "value": "full"
+      },
+      {
+        "type": "insert",
+        "value": "message"
+      },
+      {
+        "type": "insert",
+        "value": "lifecycle"
+      },
+      {
+        "type": "insert",
+        "value": "(sent,"
+      },
+      {
+        "type": "insert",
+        "value": "delivered,"
+      },
+      {
+        "type": "insert",
+        "value": "seen)."
+      },
+      {
+        "type": "insert",
+        "value": "○"
+      },
+      {
+        "type": "insert",
+        "value": "Built"
+      },
+      {
+        "type": "insert",
+        "value": "the"
+      },
+      {
+        "type": "insert",
+        "value": "React"
+      },
+      {
+        "type": "insert",
+        "value": "chat"
+      },
+      {
+        "type": "insert",
+        "value": "interface"
+      },
+      {
+        "type": "insert",
+        "value": "with"
+      },
+      {
+        "type": "insert",
+        "value": "real‐time"
+      },
+      {
+        "type": "insert",
+        "value": "rendering,"
+      },
+      {
+        "type": "insert",
+        "value": "user"
+      },
+      {
+        "type": "insert",
+        "value": "search,"
+      },
+      {
+        "type": "insert",
+        "value": "and"
+      },
+      {
+        "type": "insert",
+        "value": "presence"
+      },
+      {
+        "type": "insert",
+        "value": "indicators,"
+      },
+      {
+        "type": "insert",
+        "value": "using"
+      },
+      {
+        "type": "insert",
+        "value": "Redis‐cached"
+      },
+      {
+        "type": "insert",
+        "value": "last"
+      },
+      {
+        "type": "insert",
+        "value": "seen"
+      },
+      {
+        "type": "insert",
+        "value": "and"
+      },
+      {
+        "type": "insert",
+        "value": "infinite"
+      },
+      {
+        "type": "insert",
+        "value": "scroll"
+      },
+      {
+        "type": "insert",
+        "value": "for"
+      },
+      {
+        "type": "insert",
+        "value": "smooth"
+      },
+      {
+        "type": "insert",
+        "value": "history"
+      },
+      {
+        "type": "insert",
+        "value": "loading."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "added",
+    "old_index": null,
+    "new_index": 13,
+    "old_page": null,
+    "new_page": 0,
+    "word_diff": [
+      {
+        "type": "insert",
+        "value": "●"
+      },
+      {
+        "type": "insert",
+        "value": "Google"
+      },
+      {
+        "type": "insert",
+        "value": "Summer"
+      },
+      {
+        "type": "insert",
+        "value": "of"
+      },
+      {
+        "type": "insert",
+        "value": "Code"
+      },
+      {
+        "type": "insert",
+        "value": "–"
+      },
+      {
+        "type": "insert",
+        "value": "C2SI.org,"
+      },
+      {
+        "type": "insert",
+        "value": "○"
+      },
+      {
+        "type": "insert",
+        "value": "Optimized"
+      },
+      {
+        "type": "insert",
+        "value": "real‐time"
+      },
+      {
+        "type": "insert",
+        "value": "collaboration"
+      },
+      {
+        "type": "insert",
+        "value": "features"
+      },
+      {
+        "type": "insert",
+        "value": "with"
+      },
+      {
+        "type": "insert",
+        "value": "proper"
+      },
+      {
+        "type": "insert",
+        "value": "Firestore‐based"
+      },
+      {
+        "type": "insert",
+        "value": "user"
+      },
+      {
+        "type": "insert",
+        "value": "updates"
+      },
+      {
+        "type": "insert",
+        "value": "and"
+      },
+      {
+        "type": "insert",
+        "value": "restructured"
+      },
+      {
+        "type": "insert",
+        "value": "the"
+      },
+      {
+        "type": "insert",
+        "value": "nested"
+      },
+      {
+        "type": "insert",
+        "value": "comment"
+      },
+      {
+        "type": "insert",
+        "value": "system,"
+      },
+      {
+        "type": "insert",
+        "value": "improving"
+      },
+      {
+        "type": "insert",
+        "value": "consistency,"
+      },
+      {
+        "type": "insert",
+        "value": "and"
+      },
+      {
+        "type": "insert",
+        "value": "threading"
+      },
+      {
+        "type": "insert",
+        "value": "stability"
+      },
+      {
+        "type": "insert",
+        "value": "by"
+      },
+      {
+        "type": "insert",
+        "value": "80%."
+      },
+      {
+        "type": "insert",
+        "value": "○"
+      },
+      {
+        "type": "insert",
+        "value": "Containerized"
+      },
+      {
+        "type": "insert",
+        "value": "the"
+      },
+      {
+        "type": "insert",
+        "value": "development"
+      },
+      {
+        "type": "insert",
+        "value": "environment"
+      },
+      {
+        "type": "insert",
+        "value": "using"
+      },
+      {
+        "type": "insert",
+        "value": "Docker,"
+      },
+      {
+        "type": "insert",
+        "value": "reducing"
+      },
+      {
+        "type": "insert",
+        "value": "contributor"
+      },
+      {
+        "type": "insert",
+        "value": "setup"
+      },
+      {
+        "type": "insert",
+        "value": "time"
+      },
+      {
+        "type": "insert",
+        "value": "by"
+      },
+      {
+        "type": "insert",
+        "value": "50%."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "added",
+    "old_index": null,
+    "new_index": 15,
+    "old_page": null,
+    "new_page": 0,
+    "word_diff": [
+      {
+        "type": "insert",
+        "value": "●"
+      },
+      {
+        "type": "insert",
+        "value": "Proposed"
+      },
+      {
+        "type": "insert",
+        "value": "a"
+      },
+      {
+        "type": "insert",
+        "value": "CLI"
+      },
+      {
+        "type": "insert",
+        "value": "feature"
+      },
+      {
+        "type": "insert",
+        "value": "for"
+      },
+      {
+        "type": "insert",
+        "value": "enabling"
+      },
+      {
+        "type": "insert",
+        "value": "users"
+      },
+      {
+        "type": "insert",
+        "value": "to"
+      },
+      {
+        "type": "insert",
+        "value": "upload"
+      },
+      {
+        "type": "insert",
+        "value": "secrets"
+      },
+      {
+        "type": "insert",
+        "value": "from"
+      },
+      {
+        "type": "insert",
+        "value": "the"
+      },
+      {
+        "type": "insert",
+        "value": ".env"
+      },
+      {
+        "type": "insert",
+        "value": "file,"
+      },
+      {
+        "type": "insert",
+        "value": "lowering"
+      },
+      {
+        "type": "insert",
+        "value": "setup"
+      },
+      {
+        "type": "insert",
+        "value": "time"
+      },
+      {
+        "type": "insert",
+        "value": "by"
+      },
+      {
+        "type": "insert",
+        "value": "40%."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "unchanged",
+    "old_index": 18,
+    "new_index": 18,
+    "old_page": 0,
+    "new_page": 0,
+    "word_diff": [
+      {
+        "type": "equal",
+        "value": "●"
+      },
+      {
+        "type": "equal",
+        "value": "Implemented"
+      },
+      {
+        "type": "equal",
+        "value": "Zod"
+      },
+      {
+        "type": "equal",
+        "value": "schemas"
+      },
+      {
+        "type": "equal",
+        "value": "with"
+      },
+      {
+        "type": "equal",
+        "value": "90%"
+      },
+      {
+        "type": "equal",
+        "value": "unit"
+      },
+      {
+        "type": "equal",
+        "value": "test"
+      },
+      {
+        "type": "equal",
+        "value": "coverage"
+      },
+      {
+        "type": "equal",
+        "value": "to"
+      },
+      {
+        "type": "equal",
+        "value": "ensure"
+      },
+      {
+        "type": "equal",
+        "value": "validation"
+      },
+      {
+        "type": "equal",
+        "value": "of"
+      },
+      {
+        "type": "equal",
+        "value": "request"
+      },
+      {
+        "type": "equal",
+        "value": "and"
+      },
+      {
+        "type": "equal",
+        "value": "response"
+      },
+      {
+        "type": "equal",
+        "value": "data."
+      }
+    ]
+  },
+  {
+    "block_type": "image",
+    "change": "deleted",
+    "old_index": 19,
+    "new_index": null,
+    "old_page": 0,
+    "new_page": null,
+    "word_diff": [
+      {
+        "type": "delete",
+        "value": "03f75fc3e177dcc2a779ee54cb6a80e1a656e01e9065306bef406dbb66cf93c9"
+      }
+    ]
+  },
+  {
+    "block_type": "image",
+    "change": "deleted",
+    "old_index": 20,
+    "new_index": null,
+    "old_page": 0,
+    "new_page": null,
+    "word_diff": [
+      {
+        "type": "delete",
+        "value": "8e8d7a2d2c5f5978cc1619edb3ce74c9c21ec15919416a6ce6723572d3050f0e"
+      }
+    ]
+  },
+  {
+    "block_type": "image",
+    "change": "deleted",
+    "old_index": 21,
+    "new_index": null,
+    "old_page": 0,
+    "new_page": null,
+    "word_diff": [
+      {
+        "type": "delete",
+        "value": "67e26c0f7760b24c91471e0acd50a701b0bf7eb86a697fe4689c204eb5aecb9d"
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "modified",
+    "old_index": 22,
+    "new_index": 19,
+    "old_page": 1,
+    "new_page": 1,
+    "word_diff": [
+      {
+        "type": "equal",
+        "value": "PROJECTS"
+      },
+      {
+        "type": "delete",
+        "value": "inPay"
+      },
+      {
+        "type": "delete",
+        "value": "|"
+      },
+      {
+        "type": "insert",
+        "value": "inPay,"
+      },
+      {
+        "type": "equal",
+        "value": "Full"
+      },
+      {
+        "type": "equal",
+        "value": "Stack"
+      },
+      {
+        "type": "equal",
+        "value": "Developer"
+      },
+      {
+        "type": "equal",
+        "value": "Aug"
+      },
+      {
+        "type": "equal",
+        "value": "2024"
+      },
+      {
+        "type": "delete",
+        "value": "-"
+      },
+      {
+        "type": "insert",
+        "value": "‐"
+      },
+      {
+        "type": "equal",
+        "value": "Sep"
+      },
+      {
+        "type": "equal",
+        "value": "2024"
+      },
+      {
+        "type": "equal",
+        "value": "A"
+      },
+      {
+        "type": "delete",
+        "value": "Feature-rich"
+      },
+      {
+        "type": "delete",
+        "value": "large-scale"
+      },
+      {
+        "type": "insert",
+        "value": "Feature‐rich"
+      },
+      {
+        "type": "insert",
+        "value": "large‐scale"
+      },
+      {
+        "type": "equal",
+        "value": "P2P"
+      },
+      {
+        "type": "equal",
+        "value": "Payments"
+      },
+      {
+        "type": "equal",
+        "value": "Hub."
+      },
+      {
+        "type": "equal",
+        "value": "Website"
+      },
+      {
+        "type": "equal",
+        "value": "Source"
+      },
+      {
+        "type": "equal",
+        "value": "Code"
+      },
+      {
+        "type": "equal",
+        "value": "(100"
+      },
+      {
+        "type": "equal",
+        "value": "Users)"
+      },
+      {
+        "type": "equal",
+        "value": "Next.js"
+      },
+      {
+        "type": "equal",
+        "value": "|"
+      },
+      {
+        "type": "equal",
+        "value": "Express.js"
+      },
+      {
+        "type": "equal",
+        "value": "|"
+      },
+      {
+        "type": "equal",
+        "value": "Jest"
+      },
+      {
+        "type": "equal",
+        "value": "|"
+      },
+      {
+        "type": "equal",
+        "value": "Microservices"
+      },
+      {
+        "type": "equal",
+        "value": "|"
+      },
+      {
+        "type": "equal",
+        "value": "OpenAPI"
+      },
+      {
+        "type": "equal",
+        "value": "|"
+      },
+      {
+        "type": "equal",
+        "value": "GitHub"
+      },
+      {
+        "type": "equal",
+        "value": "Actions"
+      },
+      {
+        "type": "equal",
+        "value": "|"
+      },
+      {
+        "type": "equal",
+        "value": "Prisma"
+      },
+      {
+        "type": "equal",
+        "value": "|"
+      },
+      {
+        "type": "delete",
+        "value": "Socket.IO"
+      },
+      {
+        "type": "delete",
+        "value": "|"
+      },
+      {
+        "type": "equal",
+        "value": "Recoil"
+      },
+      {
+        "type": "equal",
+        "value": "|"
+      },
+      {
+        "type": "equal",
+        "value": "PostgreSQL"
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "unchanged",
+    "old_index": 23,
+    "new_index": 20,
+    "old_page": 1,
+    "new_page": 1,
+    "word_diff": [
+      {
+        "type": "equal",
+        "value": "●"
+      },
+      {
+        "type": "equal",
+        "value": "Automated"
+      },
+      {
+        "type": "equal",
+        "value": "workflows"
+      },
+      {
+        "type": "equal",
+        "value": "for"
+      },
+      {
+        "type": "equal",
+        "value": "tests,"
+      },
+      {
+        "type": "equal",
+        "value": "builds"
+      },
+      {
+        "type": "equal",
+        "value": "and"
+      },
+      {
+        "type": "equal",
+        "value": "deployment"
+      },
+      {
+        "type": "equal",
+        "value": "to"
+      },
+      {
+        "type": "equal",
+        "value": "Azure,"
+      },
+      {
+        "type": "equal",
+        "value": "achieving"
+      },
+      {
+        "type": "equal",
+        "value": "a"
+      },
+      {
+        "type": "equal",
+        "value": "20%"
+      },
+      {
+        "type": "equal",
+        "value": "faster"
+      },
+      {
+        "type": "equal",
+        "value": "production"
+      },
+      {
+        "type": "equal",
+        "value": "release."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "deleted",
+    "old_index": 24,
+    "new_index": null,
+    "old_page": 1,
+    "new_page": null,
+    "word_diff": [
+      {
+        "type": "delete",
+        "value": "●"
+      },
+      {
+        "type": "delete",
+        "value": "Dockerized"
+      },
+      {
+        "type": "delete",
+        "value": "apps"
+      },
+      {
+        "type": "delete",
+        "value": "for"
+      },
+      {
+        "type": "delete",
+        "value": "easier"
+      },
+      {
+        "type": "delete",
+        "value": "contribution"
+      },
+      {
+        "type": "delete",
+        "value": "setup"
+      },
+      {
+        "type": "delete",
+        "value": "and"
+      },
+      {
+        "type": "delete",
+        "value": "development,"
+      },
+      {
+        "type": "delete",
+        "value": "leading"
+      },
+      {
+        "type": "delete",
+        "value": "to"
+      },
+      {
+        "type": "delete",
+        "value": "a"
+      },
+      {
+        "type": "delete",
+        "value": "10%"
+      },
+      {
+        "type": "delete",
+        "value": "developer"
+      },
+      {
+        "type": "delete",
+        "value": "productivity"
+      },
+      {
+        "type": "delete",
+        "value": "boost."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "deleted",
+    "old_index": 25,
+    "new_index": null,
+    "old_page": 1,
+    "new_page": null,
+    "word_diff": [
+      {
+        "type": "delete",
+        "value": "●"
+      },
+      {
+        "type": "delete",
+        "value": "Arranged"
+      },
+      {
+        "type": "delete",
+        "value": "Socket.IO"
+      },
+      {
+        "type": "delete",
+        "value": "integration"
+      },
+      {
+        "type": "delete",
+        "value": "for"
+      },
+      {
+        "type": "delete",
+        "value": "real-time"
+      },
+      {
+        "type": "delete",
+        "value": "chats"
+      },
+      {
+        "type": "delete",
+        "value": "and"
+      },
+      {
+        "type": "delete",
+        "value": "notifications,"
+      },
+      {
+        "type": "delete",
+        "value": "resulting"
+      },
+      {
+        "type": "delete",
+        "value": "in"
+      },
+      {
+        "type": "delete",
+        "value": "a"
+      },
+      {
+        "type": "delete",
+        "value": "30%"
+      },
+      {
+        "type": "delete",
+        "value": "increase"
+      },
+      {
+        "type": "delete",
+        "value": "in"
+      },
+      {
+        "type": "delete",
+        "value": "user"
+      },
+      {
+        "type": "delete",
+        "value": "engagement."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "deleted",
+    "old_index": 26,
+    "new_index": null,
+    "old_page": 1,
+    "new_page": null,
+    "word_diff": [
+      {
+        "type": "delete",
+        "value": "●"
+      },
+      {
+        "type": "delete",
+        "value": "Architected"
+      },
+      {
+        "type": "delete",
+        "value": "Webhooks"
+      },
+      {
+        "type": "delete",
+        "value": "and"
+      },
+      {
+        "type": "delete",
+        "value": "Redis"
+      },
+      {
+        "type": "delete",
+        "value": "Queues"
+      },
+      {
+        "type": "delete",
+        "value": "for"
+      },
+      {
+        "type": "delete",
+        "value": "Bank"
+      },
+      {
+        "type": "delete",
+        "value": "Payments,"
+      },
+      {
+        "type": "delete",
+        "value": "speeding"
+      },
+      {
+        "type": "delete",
+        "value": "up"
+      },
+      {
+        "type": "delete",
+        "value": "transaction"
+      },
+      {
+        "type": "delete",
+        "value": "processing"
+      },
+      {
+        "type": "delete",
+        "value": "by"
+      },
+      {
+        "type": "delete",
+        "value": "40%."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "modified",
+    "old_index": 27,
+    "new_index": 22,
+    "old_page": 1,
+    "new_page": 1,
+    "word_diff": [
+      {
+        "type": "equal",
+        "value": "●"
+      },
+      {
+        "type": "equal",
+        "value": "Optimized"
+      },
+      {
+        "type": "equal",
+        "value": "queries"
+      },
+      {
+        "type": "equal",
+        "value": "with"
+      },
+      {
+        "type": "equal",
+        "value": "caching"
+      },
+      {
+        "type": "equal",
+        "value": "and"
+      },
+      {
+        "type": "equal",
+        "value": "chat"
+      },
+      {
+        "type": "equal",
+        "value": "message"
+      },
+      {
+        "type": "equal",
+        "value": "queuing,"
+      },
+      {
+        "type": "equal",
+        "value": "cutting"
+      },
+      {
+        "type": "equal",
+        "value": "database"
+      },
+      {
+        "type": "equal",
+        "value": "load"
+      },
+      {
+        "type": "equal",
+        "value": "by"
+      },
+      {
+        "type": "delete",
+        "value": "50%"
+      },
+      {
+        "type": "delete",
+        "value": "and"
+      },
+      {
+        "type": "delete",
+        "value": "boosting"
+      },
+      {
+        "type": "delete",
+        "value": "response"
+      },
+      {
+        "type": "delete",
+        "value": "times"
+      },
+      {
+        "type": "delete",
+        "value": "30%."
+      },
+      {
+        "type": "insert",
+        "value": "50%."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "added",
+    "old_index": null,
+    "new_index": 21,
+    "old_page": null,
+    "new_page": 1,
+    "word_diff": [
+      {
+        "type": "insert",
+        "value": "●"
+      },
+      {
+        "type": "insert",
+        "value": "Built"
+      },
+      {
+        "type": "insert",
+        "value": "real‐time"
+      },
+      {
+        "type": "insert",
+        "value": "infra"
+      },
+      {
+        "type": "insert",
+        "value": "with"
+      },
+      {
+        "type": "insert",
+        "value": "Socket.IO"
+      },
+      {
+        "type": "insert",
+        "value": "for"
+      },
+      {
+        "type": "insert",
+        "value": "chats"
+      },
+      {
+        "type": "insert",
+        "value": "and"
+      },
+      {
+        "type": "insert",
+        "value": "Redis‐queued"
+      },
+      {
+        "type": "insert",
+        "value": "Webhooks"
+      },
+      {
+        "type": "insert",
+        "value": "for"
+      },
+      {
+        "type": "insert",
+        "value": "payments,"
+      },
+      {
+        "type": "insert",
+        "value": "leading"
+      },
+      {
+        "type": "insert",
+        "value": "to"
+      },
+      {
+        "type": "insert",
+        "value": "a"
+      },
+      {
+        "type": "insert",
+        "value": "30%"
+      },
+      {
+        "type": "insert",
+        "value": "rise"
+      },
+      {
+        "type": "insert",
+        "value": "in"
+      },
+      {
+        "type": "insert",
+        "value": "engagement"
+      },
+      {
+        "type": "insert",
+        "value": "and"
+      },
+      {
+        "type": "insert",
+        "value": "40%"
+      },
+      {
+        "type": "insert",
+        "value": "faster"
+      },
+      {
+        "type": "insert",
+        "value": "transaction"
+      },
+      {
+        "type": "insert",
+        "value": "processing."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "unchanged",
+    "old_index": 28,
+    "new_index": 23,
+    "old_page": 1,
+    "new_page": 1,
+    "word_diff": [
+      {
+        "type": "equal",
+        "value": "●"
+      },
+      {
+        "type": "equal",
+        "value": "Executed"
+      },
+      {
+        "type": "equal",
+        "value": "advanced"
+      },
+      {
+        "type": "equal",
+        "value": "calculations"
+      },
+      {
+        "type": "equal",
+        "value": "for"
+      },
+      {
+        "type": "equal",
+        "value": "balance"
+      },
+      {
+        "type": "equal",
+        "value": "and"
+      },
+      {
+        "type": "equal",
+        "value": "payment"
+      },
+      {
+        "type": "equal",
+        "value": "histories,"
+      },
+      {
+        "type": "equal",
+        "value": "translating"
+      },
+      {
+        "type": "equal",
+        "value": "data"
+      },
+      {
+        "type": "equal",
+        "value": "into"
+      },
+      {
+        "type": "equal",
+        "value": "interactive"
+      },
+      {
+        "type": "equal",
+        "value": "charts"
+      },
+      {
+        "type": "equal",
+        "value": "with"
+      },
+      {
+        "type": "equal",
+        "value": "Recharts"
+      },
+      {
+        "type": "equal",
+        "value": "that"
+      },
+      {
+        "type": "equal",
+        "value": "improved"
+      },
+      {
+        "type": "equal",
+        "value": "accessibility"
+      },
+      {
+        "type": "equal",
+        "value": "of"
+      },
+      {
+        "type": "equal",
+        "value": "financial"
+      },
+      {
+        "type": "equal",
+        "value": "information"
+      },
+      {
+        "type": "equal",
+        "value": "by"
+      },
+      {
+        "type": "equal",
+        "value": "20%."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "modified",
+    "old_index": 29,
+    "new_index": 24,
+    "old_page": 1,
+    "new_page": 1,
+    "word_diff": [
+      {
+        "type": "delete",
+        "value": "HelioTask"
+      },
+      {
+        "type": "delete",
+        "value": "|"
+      },
+      {
+        "type": "insert",
+        "value": "HelioTask,"
+      },
+      {
+        "type": "equal",
+        "value": "Full"
+      },
+      {
+        "type": "equal",
+        "value": "Stack"
+      },
+      {
+        "type": "equal",
+        "value": "Developer"
+      },
+      {
+        "type": "equal",
+        "value": "Aug"
+      },
+      {
+        "type": "equal",
+        "value": "2024"
+      },
+      {
+        "type": "equal",
+        "value": "A"
+      },
+      {
+        "type": "delete",
+        "value": "Kan-ban"
+      },
+      {
+        "type": "insert",
+        "value": "Kan‐ban"
+      },
+      {
+        "type": "equal",
+        "value": "based"
+      },
+      {
+        "type": "equal",
+        "value": "Task"
+      },
+      {
+        "type": "equal",
+        "value": "Manager."
+      },
+      {
+        "type": "equal",
+        "value": "Website"
+      },
+      {
+        "type": "equal",
+        "value": "Source"
+      },
+      {
+        "type": "equal",
+        "value": "Code"
+      },
+      {
+        "type": "equal",
+        "value": "Next.js"
+      },
+      {
+        "type": "equal",
+        "value": "|"
+      },
+      {
+        "type": "equal",
+        "value": "Shadcn"
+      },
+      {
+        "type": "equal",
+        "value": "|"
+      },
+      {
+        "type": "equal",
+        "value": "Express.js"
+      },
+      {
+        "type": "equal",
+        "value": "|"
+      },
+      {
+        "type": "equal",
+        "value": "Nest.js"
+      },
+      {
+        "type": "equal",
+        "value": "|"
+      },
+      {
+        "type": "equal",
+        "value": "Flask"
+      },
+      {
+        "type": "equal",
+        "value": "|"
+      },
+      {
+        "type": "equal",
+        "value": "Tailwind"
+      },
+      {
+        "type": "equal",
+        "value": "|"
+      },
+      {
+        "type": "equal",
+        "value": "Recoil"
+      },
+      {
+        "type": "equal",
+        "value": "|"
+      },
+      {
+        "type": "equal",
+        "value": "React|"
+      },
+      {
+        "type": "equal",
+        "value": "Django"
+      },
+      {
+        "type": "equal",
+        "value": "|"
+      },
+      {
+        "type": "delete",
+        "value": "Vercel"
+      },
+      {
+        "type": "insert",
+        "value": "MongoDB"
+      },
+      {
+        "type": "equal",
+        "value": "|"
+      },
+      {
+        "type": "equal",
+        "value": "Git"
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "unchanged",
+    "old_index": 30,
+    "new_index": 25,
+    "old_page": 1,
+    "new_page": 1,
+    "word_diff": [
+      {
+        "type": "equal",
+        "value": "●"
+      },
+      {
+        "type": "equal",
+        "value": "Crafted"
+      },
+      {
+        "type": "equal",
+        "value": "drag"
+      },
+      {
+        "type": "equal",
+        "value": "and"
+      },
+      {
+        "type": "equal",
+        "value": "drop"
+      },
+      {
+        "type": "equal",
+        "value": "feature"
+      },
+      {
+        "type": "equal",
+        "value": "for"
+      },
+      {
+        "type": "equal",
+        "value": "task"
+      },
+      {
+        "type": "equal",
+        "value": "status"
+      },
+      {
+        "type": "equal",
+        "value": "updates,"
+      },
+      {
+        "type": "equal",
+        "value": "boosting"
+      },
+      {
+        "type": "equal",
+        "value": "task"
+      },
+      {
+        "type": "equal",
+        "value": "management"
+      },
+      {
+        "type": "equal",
+        "value": "efficiency"
+      },
+      {
+        "type": "equal",
+        "value": "by"
+      },
+      {
+        "type": "equal",
+        "value": "20%."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "unchanged",
+    "old_index": 31,
+    "new_index": 26,
+    "old_page": 1,
+    "new_page": 1,
+    "word_diff": [
+      {
+        "type": "equal",
+        "value": "●"
+      },
+      {
+        "type": "equal",
+        "value": "Established"
+      },
+      {
+        "type": "equal",
+        "value": "task"
+      },
+      {
+        "type": "equal",
+        "value": "filtering"
+      },
+      {
+        "type": "equal",
+        "value": "and"
+      },
+      {
+        "type": "equal",
+        "value": "sorting"
+      },
+      {
+        "type": "equal",
+        "value": "by"
+      },
+      {
+        "type": "equal",
+        "value": "status,"
+      },
+      {
+        "type": "equal",
+        "value": "priority,"
+      },
+      {
+        "type": "equal",
+        "value": "and"
+      },
+      {
+        "type": "equal",
+        "value": "due"
+      },
+      {
+        "type": "equal",
+        "value": "dates,"
+      },
+      {
+        "type": "equal",
+        "value": "improving"
+      },
+      {
+        "type": "equal",
+        "value": "task"
+      },
+      {
+        "type": "equal",
+        "value": "organization"
+      },
+      {
+        "type": "equal",
+        "value": "by"
+      },
+      {
+        "type": "equal",
+        "value": "25%."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "modified",
+    "old_index": 32,
+    "new_index": 27,
+    "old_page": 1,
+    "new_page": 1,
+    "word_diff": [
+      {
+        "type": "equal",
+        "value": "●"
+      },
+      {
+        "type": "delete",
+        "value": "Cookie"
+      },
+      {
+        "type": "insert",
+        "value": "Designed"
+      },
+      {
+        "type": "insert",
+        "value": "cookie"
+      },
+      {
+        "type": "equal",
+        "value": "based"
+      },
+      {
+        "type": "equal",
+        "value": "authentication"
+      },
+      {
+        "type": "equal",
+        "value": "system"
+      },
+      {
+        "type": "equal",
+        "value": "for"
+      },
+      {
+        "type": "equal",
+        "value": "higher"
+      },
+      {
+        "type": "equal",
+        "value": "security."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "unchanged",
+    "old_index": 33,
+    "new_index": 28,
+    "old_page": 1,
+    "new_page": 1,
+    "word_diff": [
+      {
+        "type": "equal",
+        "value": "TECHNICAL"
+      },
+      {
+        "type": "equal",
+        "value": "SKILLS"
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "modified",
+    "old_index": 34,
+    "new_index": 29,
+    "old_page": 1,
+    "new_page": 1,
+    "word_diff": [
+      {
+        "type": "equal",
+        "value": "●"
+      },
+      {
+        "type": "equal",
+        "value": "DSA/CP"
+      },
+      {
+        "type": "equal",
+        "value": ":"
+      },
+      {
+        "type": "delete",
+        "value": "LeetCode-"
+      },
+      {
+        "type": "insert",
+        "value": "LeetCode‐"
+      },
+      {
+        "type": "equal",
+        "value": "500"
+      },
+      {
+        "type": "equal",
+        "value": "problems"
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "unchanged",
+    "old_index": 35,
+    "new_index": 30,
+    "old_page": 1,
+    "new_page": 1,
+    "word_diff": [
+      {
+        "type": "equal",
+        "value": "●"
+      },
+      {
+        "type": "equal",
+        "value": "Languages:"
+      },
+      {
+        "type": "equal",
+        "value": "C,"
+      },
+      {
+        "type": "equal",
+        "value": "C++,"
+      },
+      {
+        "type": "equal",
+        "value": "Java,"
+      },
+      {
+        "type": "equal",
+        "value": "Python,"
+      },
+      {
+        "type": "equal",
+        "value": "Javascript,"
+      },
+      {
+        "type": "equal",
+        "value": "Typescript,"
+      },
+      {
+        "type": "equal",
+        "value": "Go."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "unchanged",
+    "old_index": 36,
+    "new_index": 31,
+    "old_page": 1,
+    "new_page": 1,
+    "word_diff": [
+      {
+        "type": "equal",
+        "value": "●"
+      },
+      {
+        "type": "equal",
+        "value": "ML/AI:"
+      },
+      {
+        "type": "equal",
+        "value": "OpenAI,"
+      },
+      {
+        "type": "equal",
+        "value": "LangChain,"
+      },
+      {
+        "type": "equal",
+        "value": "Hugging"
+      },
+      {
+        "type": "equal",
+        "value": "Face,"
+      },
+      {
+        "type": "equal",
+        "value": "TensorFlow,"
+      },
+      {
+        "type": "equal",
+        "value": "Pandas,"
+      },
+      {
+        "type": "equal",
+        "value": "AI"
+      },
+      {
+        "type": "equal",
+        "value": "Agents."
+      }
+    ]
+  },
+  {
+    "block_type": "paragraph",
+    "change": "modified",
+    "old_index": 37,
+    "new_index": 32,
+    "old_page": 1,
+    "new_page": 1,
+    "word_diff": [
+      {
+        "type": "equal",
+        "value": "●"
+      },
+      {
+        "type": "equal",
+        "value": "Others:"
+      },
+      {
+        "type": "equal",
+        "value": "Docker,"
+      },
+      {
+        "type": "equal",
+        "value": "Kubernetes,"
+      },
+      {
+        "type": "equal",
+        "value": "Terraform,"
+      },
+      {
+        "type": "delete",
+        "value": "Jenkins,"
+      },
+      {
+        "type": "insert",
+        "value": "TravisCI,"
+      },
+      {
+        "type": "equal",
+        "value": "GraphQL,"
+      },
+      {
+        "type": "equal",
+        "value": "gRPC,"
+      },
+      {
+        "type": "equal",
+        "value": "Azure,"
+      },
+      {
+        "type": "equal",
+        "value": "AWS,"
+      },
+      {
+        "type": "equal",
+        "value": "GCP,"
+      },
+      {
+        "type": "equal",
+        "value": "Vercel,"
+      },
+      {
+        "type": "equal",
+        "value": "Firebase,"
+      },
+      {
+        "type": "equal",
+        "value": "Stripe,"
+      },
+      {
+        "type": "equal",
+        "value": "Prometheus,"
+      },
+      {
+        "type": "equal",
+        "value": "Grafana,"
+      },
+      {
+        "type": "equal",
+        "value": "Redux,"
+      },
+      {
+        "type": "equal",
+        "value": "Framer"
+      },
+      {
+        "type": "equal",
+        "value": "Motion,"
+      },
+      {
+        "type": "equal",
+        "value": "React,"
+      },
+      {
+        "type": "equal",
+        "value": "React"
+      },
+      {
+        "type": "equal",
+        "value": "Native,"
+      },
+      {
+        "type": "insert",
+        "value": "FFMpeg,"
+      },
+      {
+        "type": "equal",
+        "value": "Figma."
+      }
+    ]
+  },
+  {
+    "block_type": "image",
+    "change": "deleted",
+    "old_index": 38,
+    "new_index": null,
+    "old_page": 1,
+    "new_page": null,
+    "word_diff": [
+      {
+        "type": "delete",
+        "value": "5e1f308602fb4ac5622d3d1e2f939906c4a46e27c81e656c8ac1ad704a44bcb6"
+      }
+    ]
+  },
+  {
+    "block_type": "image",
+    "change": "deleted",
+    "old_index": 39,
+    "new_index": null,
+    "old_page": 1,
+    "new_page": null,
+    "word_diff": [
+      {
+        "type": "delete",
+        "value": "2f191aaebc5cd36360cf0c7d2e97b0b285b67c2f1b2aa818973c193065877af8"
       }
     ]
   }

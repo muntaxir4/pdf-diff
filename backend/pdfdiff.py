@@ -34,6 +34,49 @@ def hash_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def clean_text(value: str) -> str:
+    """Clean text from PDF-specific characters and artifacts."""
+    # \u00ad is soft hyphen, \u200b is zero-width space, \u200d is zero-width joiner
+    return (
+        value.replace("\u00ad", "").replace("\u200b", "").replace("\u200d", "").strip()
+    )
+
+
+def is_bullet_start(text: str) -> bool:
+    """Check if text starts with a bullet point character."""
+    # Comprehensive list of bullet characters including unicode ranges
+    bullet_chars = (
+        "•",
+        "●",
+        "◦",
+        "▪",
+        "▫",
+        "■",
+        "□",
+        "∙",
+        "◦",
+        "‣",
+        "",
+        "·",
+        "§",
+        "*",
+        "-",
+        "–",
+        "—",
+        "»",
+        "›",
+        "■",
+    )
+    trimmed = clean_text(text)
+    if not trimmed:
+        return False
+    # Also check for common bullet patterns like "1.", "a)", etc. if needed,
+    # but for now let's stick to symbols.
+    return trimmed.startswith(bullet_chars) or (
+        len(trimmed) > 1 and trimmed[0] in bullet_chars
+    )
+
+
 def _split_paragraphs_from_lines(lines: List[Dict[str, Any]]) -> List[str]:
     if not lines:
         return []
@@ -56,9 +99,6 @@ def _split_paragraphs_from_lines(lines: List[Dict[str, Any]]) -> List[str]:
         median_gap = sorted(gaps)[len(gaps) // 2]
         gap_threshold = max(12.0, median_gap * 1.5)
 
-    def clean_text(value: str) -> str:
-        return value.replace("\u00ad", "").strip()
-
     def is_sentence_end(value: str) -> bool:
         trimmed = clean_text(value)
         if not trimmed:
@@ -74,13 +114,32 @@ def _split_paragraphs_from_lines(lines: List[Dict[str, Any]]) -> List[str]:
         first = trimmed[0]
         return first.isupper() or first.isdigit()
 
-    def is_bullet_start(value: str) -> bool:
+    def is_section_header(value: str) -> bool:
         trimmed = clean_text(value)
-        return trimmed.startswith(("•", "-", "–", "—", "*", "·"))
+        if not trimmed:
+            return False
+        if len(trimmed) > 40:
+            return False
+        letters = [c for c in trimmed if c.isalpha()]
+        if not letters:
+            return False
+        return all(c.isupper() for c in letters)
 
     min_x0 = min(x0_values) if x0_values else 0.0
     indent_tolerance = 8.0
     column_break_threshold = 24.0
+
+    def join_buffer(buf: List[str]) -> str:
+        if not buf:
+            return ""
+        text = buf[0]
+        for line in buf[1:]:
+            if text.endswith(("-", "‐", "‑")):
+                # Likely hyphenated word at line break
+                text = text[:-1] + line
+            else:
+                text += " " + line
+        return text
 
     paragraphs: List[str] = []
     buffer: List[str] = []
@@ -88,8 +147,9 @@ def _split_paragraphs_from_lines(lines: List[Dict[str, Any]]) -> List[str]:
     prev_text: str = ""
     prev_x0: Optional[float] = None
     for line in sorted_lines:
-        text = clean_text(line.get("text") or "")
-        if not text:
+        text = line.get("text") or ""
+        cleaned = clean_text(text)
+        if not cleaned:
             continue
         top = line.get("top")
         x0 = line.get("x0")
@@ -97,6 +157,19 @@ def _split_paragraphs_from_lines(lines: List[Dict[str, Any]]) -> List[str]:
         gap = None
         if prev_bottom is not None and isinstance(top, (int, float)):
             gap = top - prev_bottom
+
+        # Trigger break on bullet or section header
+        if buffer and (
+            is_bullet_start(cleaned)
+            or (
+                len(cleaned) < 40
+                and cleaned.isupper()
+                and any(c.isalpha() for c in cleaned)
+            )
+        ):
+            paragraphs.append(join_buffer(buffer))
+            buffer = []
+
         if (
             gap is not None
             and buffer
@@ -105,11 +178,11 @@ def _split_paragraphs_from_lines(lines: List[Dict[str, Any]]) -> List[str]:
                 or (
                     gap >= max(2.0, median_gap * 0.8)
                     and is_sentence_end(prev_text)
-                    and starts_new_sentence(text)
+                    and starts_new_sentence(cleaned)
                 )
                 or (
                     is_sentence_end(prev_text)
-                    and starts_new_sentence(text)
+                    and starts_new_sentence(cleaned)
                     and line_x0 is not None
                     and abs(line_x0 - min_x0) <= indent_tolerance
                 )
@@ -118,34 +191,37 @@ def _split_paragraphs_from_lines(lines: List[Dict[str, Any]]) -> List[str]:
                     and prev_x0 is not None
                     and abs(line_x0 - prev_x0) >= column_break_threshold
                 )
-                or is_bullet_start(text)
             )
         ):
-            paragraphs.append(" ".join(buffer))
+            paragraphs.append(join_buffer(buffer))
             buffer = []
-        buffer.append(text)
+        buffer.append(cleaned)
         prev_bottom = (
             line.get("bottom")
             if isinstance(line.get("bottom"), (int, float))
             else prev_bottom
         )
         prev_x0 = line_x0 if line_x0 is not None else prev_x0
-        prev_text = text
+        prev_text = cleaned
 
     if buffer:
-        paragraphs.append(" ".join(buffer))
+        paragraphs.append(join_buffer(buffer))
 
     return paragraphs
 
 
 def extract_blocks(pdf_path: str) -> List[Block]:
     blocks: List[Block] = []
+    # Use tighter tolerance (defaults: x=3, y=3) to avoid merging words
+    # x_tolerance=2 helps with resumes that often have tight kerning or missing spaces
+    extraction_settings = {"x_tolerance": 2, "y_tolerance": 3}
+
     with pdfplumber.open(pdf_path) as pdf:
         for page_index, page in enumerate(pdf.pages):
-            text_lines = page.extract_text_lines() or []
+            text_lines = page.extract_text_lines(**extraction_settings) or []
             paragraphs = _split_paragraphs_from_lines(text_lines)
             if not paragraphs:
-                text = page.extract_text() or ""
+                text = page.extract_text(**extraction_settings) or ""
                 paragraphs = (
                     [
                         " ".join(
@@ -233,35 +309,14 @@ def similarity(a: str, b: str) -> float:
     return SequenceMatcher(None, a, b).ratio()
 
 
-def match_blocks(
-    old_blocks: List[Block], new_blocks: List[Block], threshold: float
-) -> Tuple[Dict[int, int], List[int], List[int]]:
-    matched_old_to_new: Dict[int, int] = {}
-    used_new: set[int] = set()
-
-    for i, old in enumerate(old_blocks):
-        best_j = None
-        best_score = 0.0
-        for j, new in enumerate(new_blocks):
-            if j in used_new or old.block_type != new.block_type:
-                continue
-            score = similarity(old.norm, new.norm)
-            if score > best_score:
-                best_score = score
-                best_j = j
-        if best_j is not None and best_score >= threshold:
-            matched_old_to_new[i] = best_j
-            used_new.add(best_j)
-
-    unmatched_old = [i for i in range(len(old_blocks)) if i not in matched_old_to_new]
-    unmatched_new = [j for j in range(len(new_blocks)) if j not in used_new]
-    return matched_old_to_new, unmatched_old, unmatched_new
-
-
 def word_diff(old_text: str, new_text: str) -> List[Dict[str, str]]:
+    """Generate a word-level diff between two strings."""
+    # Split while preserving some punctuation if possible, but split() is simple
     old_tokens = old_text.split()
     new_tokens = new_text.split()
-    sm = SequenceMatcher(None, old_tokens, new_tokens)
+
+    # autojunk=False helps with small texts where common words might be ignored
+    sm = SequenceMatcher(None, old_tokens, new_tokens, autojunk=False)
     diffs: List[Dict[str, str]] = []
     for tag, i1, i2, j1, j2 in sm.get_opcodes():
         if tag == "equal":
@@ -286,68 +341,149 @@ def build_diff(
     new_blocks: List[Block],
     threshold: float,
 ) -> List[Dict[str, Any]]:
-    matched, unmatched_old, unmatched_new = match_blocks(
-        old_blocks, new_blocks, threshold
-    )
+    """Build a comprehensive diff between two lists of blocks."""
+    # Use SequenceMatcher on block norms to find the best global alignment
+    old_norms = [b.norm for b in old_blocks]
+    new_norms = [b.norm for b in new_blocks]
+
+    # We use a custom isjunk to ignore empty/very short blocks if needed
+    sm = SequenceMatcher(None, old_norms, new_norms, autojunk=False)
 
     results: List[Dict[str, Any]] = []
 
-    for old_i, new_i in matched.items():
-        old = old_blocks[old_i]
-        new = new_blocks[new_i]
-        change = "unchanged"
-        if old.block_type == "paragraph":
-            diff = word_diff(old.content, new.content)
-            if any(token["type"] != "equal" for token in diff):
-                change = "modified"
-        else:
-            diff = []
-        if change == "unchanged" and old_i != new_i:
-            change = "moved"
+    for tag, i1, i2, j1, j2 in sm.get_opcodes():
+        if tag == "equal":
+            # Blocks are identical (according to norm)
+            for i, j in zip(range(i1, i2), range(j1, j2)):
+                old = old_blocks[i]
+                new = new_blocks[j]
+                # Even if norm is equal, check for actual content diff (e.g. case)
+                diff = word_diff(old.content, new.content)
+                change = "unchanged"
+                if any(t["type"] != "equal" for t in diff):
+                    change = "modified"
 
-        results.append(
-            {
-                "block_type": old.block_type,
-                "change": change,
-                "old_index": old_i,
-                "new_index": new_i,
-                "old_page": old.page_index,
-                "new_page": new.page_index,
-                "word_diff": diff,
-            }
-        )
+                results.append(
+                    {
+                        "block_type": old.block_type,
+                        "change": change,
+                        "old_index": i,
+                        "new_index": j,
+                        "old_page": old.page_index,
+                        "new_page": new.page_index,
+                        "word_diff": diff,
+                    }
+                )
+        elif tag == "delete":
+            for i in range(i1, i2):
+                old = old_blocks[i]
+                results.append(
+                    {
+                        "block_type": old.block_type,
+                        "change": "deleted",
+                        "old_index": i,
+                        "new_index": None,
+                        "old_page": old.page_index,
+                        "new_page": None,
+                        "word_diff": word_diff(old.content, ""),
+                    }
+                )
+        elif tag == "insert":
+            for j in range(j1, j2):
+                new = new_blocks[j]
+                results.append(
+                    {
+                        "block_type": new.block_type,
+                        "change": "added",
+                        "old_index": None,
+                        "new_index": j,
+                        "old_page": None,
+                        "new_page": new.page_index,
+                        "word_diff": word_diff("", new.content),
+                    }
+                )
+        elif tag == "replace":
+            # Heuristic for matching blocks in a 'replace' range
+            sub_old_idx = list(range(i1, i2))
+            sub_new_idx = list(range(j1, j2))
 
-    for old_i in unmatched_old:
-        old = old_blocks[old_i]
-        results.append(
-            {
-                "block_type": old.block_type,
-                "change": "deleted",
-                "old_index": old_i,
-                "new_index": None,
-                "old_page": old.page_index,
-                "new_page": None,
-                "word_diff": [],
-            }
-        )
+            # Try to match blocks based on similarity threshold
+            matched = []
+            used_new = set()
+            for oi in sub_old_idx:
+                best_ji = None
+                best_score = 0.0
+                for ni in sub_new_idx:
+                    if ni in used_new:
+                        continue
+                    if old_blocks[oi].block_type != new_blocks[ni].block_type:
+                        continue
 
-    for new_i in unmatched_new:
-        new = new_blocks[new_i]
-        results.append(
-            {
-                "block_type": new.block_type,
-                "change": "added",
-                "old_index": None,
-                "new_index": new_i,
-                "old_page": None,
-                "new_page": new.page_index,
-                "word_diff": [],
-            }
-        )
+                    score = similarity(old_blocks[oi].norm, new_blocks[ni].norm)
+                    if score > best_score:
+                        best_score = score
+                        best_ji = ni
 
-    return sorted(
-        results, key=lambda x: (x["block_type"], x["change"], x.get("old_index") or -1)
-    )
+                if best_ji is not None and best_score >= threshold:
+                    matched.append((oi, best_ji))
+                    used_new.add(best_ji)
+
+            # Now we have some matched pairs. The rest are deleted/added.
+            matched_old = {m[0] for m in matched}
+            matched_new = {m[1] for m in matched}
+
+            # To maintain some order, we can output deletions, then matched/modified, then insertions
+            # or try to interleave. Let's just follow the order of the old document for deletions/matches
+            # and then the new document for remaining insertions.
+
+            for oi in sub_old_idx:
+                if oi in matched_old:
+                    # Find which new index it matched
+                    ni = next(m[1] for m in matched if m[0] == oi)
+                    old = old_blocks[oi]
+                    new = new_blocks[ni]
+                    diff = word_diff(old.content, new.content)
+                    results.append(
+                        {
+                            "block_type": old.block_type,
+                            "change": "modified",
+                            "old_index": oi,
+                            "new_index": ni,
+                            "old_page": old.page_index,
+                            "new_page": new.page_index,
+                            "word_diff": diff,
+                        }
+                    )
+                else:
+                    old = old_blocks[oi]
+                    results.append(
+                        {
+                            "block_type": old.block_type,
+                            "change": "deleted",
+                            "old_index": oi,
+                            "new_index": None,
+                            "old_page": old.page_index,
+                            "new_page": None,
+                            "word_diff": word_diff(old.content, ""),
+                        }
+                    )
+
+            for ni in sub_new_idx:
+                if ni not in matched_new:
+                    new = new_blocks[ni]
+                    results.append(
+                        {
+                            "block_type": new.block_type,
+                            "change": "added",
+                            "old_index": None,
+                            "new_index": ni,
+                            "old_page": None,
+                            "new_page": new.page_index,
+                            "word_diff": word_diff("", new.content),
+                        }
+                    )
+
+    return results
 
 
 def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:

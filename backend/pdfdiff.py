@@ -34,23 +34,137 @@ def hash_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def _split_paragraphs_from_lines(lines: List[Dict[str, Any]]) -> List[str]:
+    if not lines:
+        return []
+
+    sorted_lines = sorted(lines, key=lambda l: (l.get("top", 0), l.get("x0", 0)))
+    gaps: List[float] = []
+    x0_values: List[float] = []
+    for prev, curr in zip(sorted_lines, sorted_lines[1:]):
+        prev_bottom = prev.get("bottom")
+        curr_top = curr.get("top")
+        if isinstance(prev_bottom, (int, float)) and isinstance(curr_top, (int, float)):
+            gaps.append(curr_top - prev_bottom)
+        curr_x0 = curr.get("x0")
+        if isinstance(curr_x0, (int, float)):
+            x0_values.append(float(curr_x0))
+
+    gap_threshold = 12.0
+    median_gap = 0.0
+    if gaps:
+        median_gap = sorted(gaps)[len(gaps) // 2]
+        gap_threshold = max(12.0, median_gap * 1.5)
+
+    def clean_text(value: str) -> str:
+        return value.replace("\u00ad", "").strip()
+
+    def is_sentence_end(value: str) -> bool:
+        trimmed = clean_text(value)
+        if not trimmed:
+            return False
+        if trimmed.endswith(("-", "‐", "‑", "–", "—")):
+            return False
+        return trimmed.endswith((".", "!", "?", ".”", '!"', '?"', '".'))
+
+    def starts_new_sentence(value: str) -> bool:
+        trimmed = clean_text(value)
+        if not trimmed:
+            return False
+        first = trimmed[0]
+        return first.isupper() or first.isdigit()
+
+    def is_bullet_start(value: str) -> bool:
+        trimmed = clean_text(value)
+        return trimmed.startswith(("•", "-", "–", "—", "*", "·"))
+
+    min_x0 = min(x0_values) if x0_values else 0.0
+    indent_tolerance = 8.0
+    column_break_threshold = 24.0
+
+    paragraphs: List[str] = []
+    buffer: List[str] = []
+    prev_bottom: Optional[float] = None
+    prev_text: str = ""
+    prev_x0: Optional[float] = None
+    for line in sorted_lines:
+        text = clean_text(line.get("text") or "")
+        if not text:
+            continue
+        top = line.get("top")
+        x0 = line.get("x0")
+        line_x0 = float(x0) if isinstance(x0, (int, float)) else None
+        gap = None
+        if prev_bottom is not None and isinstance(top, (int, float)):
+            gap = top - prev_bottom
+        if (
+            gap is not None
+            and buffer
+            and (
+                gap > gap_threshold
+                or (
+                    gap >= max(2.0, median_gap * 0.8)
+                    and is_sentence_end(prev_text)
+                    and starts_new_sentence(text)
+                )
+                or (
+                    is_sentence_end(prev_text)
+                    and starts_new_sentence(text)
+                    and line_x0 is not None
+                    and abs(line_x0 - min_x0) <= indent_tolerance
+                )
+                or (
+                    line_x0 is not None
+                    and prev_x0 is not None
+                    and abs(line_x0 - prev_x0) >= column_break_threshold
+                )
+                or is_bullet_start(text)
+            )
+        ):
+            paragraphs.append(" ".join(buffer))
+            buffer = []
+        buffer.append(text)
+        prev_bottom = (
+            line.get("bottom")
+            if isinstance(line.get("bottom"), (int, float))
+            else prev_bottom
+        )
+        prev_x0 = line_x0 if line_x0 is not None else prev_x0
+        prev_text = text
+
+    if buffer:
+        paragraphs.append(" ".join(buffer))
+
+    return paragraphs
+
+
 def extract_blocks(pdf_path: str) -> List[Block]:
     blocks: List[Block] = []
     with pdfplumber.open(pdf_path) as pdf:
         for page_index, page in enumerate(pdf.pages):
-            text = page.extract_text() or ""
-            if text.strip():
-                paragraphs = [p for p in (seg.strip() for seg in text.split("\n")) if p]
-                for i, para in enumerate(paragraphs):
-                    blocks.append(
-                        Block(
-                            block_type="paragraph",
-                            content=para,
-                            norm=normalize_text(para),
-                            page_index=page_index,
-                            block_index=i,
+            text_lines = page.extract_text_lines() or []
+            paragraphs = _split_paragraphs_from_lines(text_lines)
+            if not paragraphs:
+                text = page.extract_text() or ""
+                paragraphs = (
+                    [
+                        " ".join(
+                            line.strip() for line in text.splitlines() if line.strip()
                         )
+                    ]
+                    if text.strip()
+                    else []
+                )
+            for i, para in enumerate(paragraphs):
+                blocks.append(
+                    Block(
+                        block_type="paragraph",
+                        content=para,
+                        norm=normalize_text(para),
+                        page_index=page_index,
+                        block_index=i,
                     )
+                )
 
             tables = page.extract_tables() or []
             for i, table in enumerate(tables):
@@ -182,12 +296,14 @@ def build_diff(
         old = old_blocks[old_i]
         new = new_blocks[new_i]
         change = "unchanged"
-        if old_i != new_i:
-            change = "moved"
         if old.block_type == "paragraph":
             diff = word_diff(old.content, new.content)
+            if any(token["type"] != "equal" for token in diff):
+                change = "modified"
         else:
             diff = []
+        if change == "unchanged" and old_i != new_i:
+            change = "moved"
 
         results.append(
             {

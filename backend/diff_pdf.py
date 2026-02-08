@@ -86,12 +86,30 @@ def render_github_diff_pdf(diff: List[DiffItem], out_path: str) -> None:
             page_break()
 
     changed_items = [i for i in diff if i.get("change") != "unchanged"]
+    total_inserted = 0
+    total_deleted = 0
+    for item in diff:
+        if item.get("block_type") == "paragraph":
+            for token in item.get("word_diff", []):
+                if token.get("type") == "insert":
+                    total_inserted += 1
+                elif token.get("type") == "delete":
+                    total_deleted += 1
 
     _draw_text_line(c, "PDF Diff Report", margin, y, "Helvetica-Bold", 14)
     y -= line_height
     _draw_text_line(
         c,
         f"Changes: {len(changed_items)} / Total blocks: {len(diff)}",
+        margin,
+        y,
+        "Helvetica",
+        10,
+    )
+    y -= line_height
+    _draw_text_line(
+        c,
+        f"Words inserted: {total_inserted} | Words deleted: {total_deleted}",
         margin,
         y,
         "Helvetica",
@@ -109,6 +127,17 @@ def render_github_diff_pdf(diff: List[DiffItem], out_path: str) -> None:
         y -= line_height
 
         if item["block_type"] == "paragraph" and item.get("word_diff"):
+            inserted = sum(1 for t in item["word_diff"] if t.get("type") == "insert")
+            deleted = sum(1 for t in item["word_diff"] if t.get("type") == "delete")
+            _draw_text_line(
+                c,
+                f"Words: +{inserted} / -{deleted}",
+                margin,
+                y,
+                "Helvetica",
+                9,
+            )
+            y -= line_height
             ensure_space(2)
             y = _draw_wrapped_tokens(
                 c,

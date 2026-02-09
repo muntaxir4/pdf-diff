@@ -13,7 +13,7 @@ from difflib import SequenceMatcher
 from typing import Any, Dict, List, Optional, Sequence, Tuple, cast
 
 import pdfplumber
-from diff_pdf import render_github_diff_pdf
+from diff_pdf_report import render_github_diff_pdf
 
 
 @dataclass

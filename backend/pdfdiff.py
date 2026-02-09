@@ -47,6 +47,7 @@ def is_bullet_start(text: str) -> bool:
     # Comprehensive list of bullet characters including unicode ranges
     bullet_chars = (
         "•",
+        "○",
         "●",
         "◦",
         "▪",

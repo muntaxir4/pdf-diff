@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 
 const PageRenderer = ({ page, blocks, type }) => {
   // Constants for display
-  const PAGE_WIDTH_PX = 500; // Fixed display width
+  const PAGE_WIDTH_PX = 500; // Fixed display width for layout calculations
   const scale = PAGE_WIDTH_PX / page.width;
   const heightPx = page.height * scale;
 
@@ -53,8 +53,20 @@ const PageRenderer = ({ page, blocks, type }) => {
               .join(" ")
           : "";
 
+        const isImage =
+          item.block_type === "image" && textContent.startsWith("data:image");
+
         // Render individual words inside the block to simulate proper highlighting
         const renderWords = () => {
+          if (isImage) {
+            return (
+              <img
+                src={textContent}
+                alt="Extracted"
+                className="w-full h-full object-contain"
+              />
+            );
+          }
           if (item.block_type === "image") return <span>[Image]</span>;
           if (!item.word_diff) return textContent;
 
@@ -89,8 +101,8 @@ const PageRenderer = ({ page, blocks, type }) => {
         return (
           <div
             key={idx}
-            className="absolute leading-tight hover:z-10 hover:outline hover:outline-blue-500 select-none cursor-pointer flex items-start flex-wrap content-start"
-            title={textContent}
+            className="absolute leading-none hover:z-50 hover:outline hover:outline-blue-500 select-none cursor-pointer flex items-start flex-wrap content-start"
+            title={isImage ? "Image" : textContent}
             style={{
               left: left,
               top: t,
@@ -99,7 +111,8 @@ const PageRenderer = ({ page, blocks, type }) => {
               backgroundColor: bgColor,
               border: `1px solid ${borderColor}`,
               color: "rgba(0,0,0,0.8)",
-              fontSize: "10px",
+              fontSize: "9px",
+              lineHeight: 1,
               whiteSpace: "pre-wrap",
               wordBreak: "break-all",
               overflow: "hidden",
@@ -128,63 +141,65 @@ const DiffResult = ({ diff: diffData }) => {
   };
 
   return (
-    <div className="w-full max-w-[1400px] mx-auto mt-8 font-sans">
-      <div className="flex justify-between items-center bg-white p-4 shadow-sm rounded-lg mb-6 border border-gray-200">
-        <h2 className="text-lg font-bold text-gray-800">
-          Visual PDF Comparison
-        </h2>
-        <div className="flex gap-4 text-sm">
-          <div className="flex items-center gap-2">
-            <span className="w-3 h-3 bg-red-200 border border-red-400 block rounded-sm"></span>
-            <span className="text-gray-600">Deleted (Old)</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="w-3 h-3 bg-green-200 border border-green-400 block rounded-sm"></span>
-            <span className="text-gray-600">Added (New)</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="w-3 h-3 bg-orange-200 border border-orange-400 block rounded-sm"></span>
-            <span className="text-gray-600">Modified</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="w-3 h-3 bg-blue-200 border border-blue-400 block rounded-sm"></span>
-            <span className="text-gray-600">Moved</span>
-          </div>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-2 gap-8">
-        {/* Old Version Column */}
-        <div className="bg-gray-100/50 p-6 rounded-xl border border-gray-200">
-          <h3 className="text-center font-bold text-gray-700 mb-6 bg-white py-2 rounded shadow-sm border border-gray-100">
-            Original Version
-          </h3>
-          <div className="flex flex-col items-center">
-            {old_pages.map((page) => (
-              <PageRenderer
-                key={`old-${page.index}`}
-                page={page}
-                blocks={getBlocksForPage(page.index, "old")}
-                type="old"
-              />
-            ))}
+    <div className="w-full overflow-x-auto mt-8 font-sans">
+      <div className="max-w-[1400px] mx-auto min-w-[1000px]">
+        <div className="flex justify-between items-center bg-white p-4 shadow-sm rounded-lg mb-6 border border-gray-200">
+          <h2 className="text-lg font-bold text-gray-800">
+            Visual PDF Comparison
+          </h2>
+          <div className="flex gap-4 text-sm">
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 bg-red-200 border border-red-400 block rounded-sm"></span>
+              <span className="text-gray-600">Deleted (Old)</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 bg-green-200 border border-green-400 block rounded-sm"></span>
+              <span className="text-gray-600">Added (New)</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 bg-orange-200 border border-orange-400 block rounded-sm"></span>
+              <span className="text-gray-600">Modified</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 bg-blue-200 border border-blue-400 block rounded-sm"></span>
+              <span className="text-gray-600">Moved</span>
+            </div>
           </div>
         </div>
 
-        {/* New Version Column */}
-        <div className="bg-gray-100/50 p-6 rounded-xl border border-gray-200">
-          <h3 className="text-center font-bold text-gray-700 mb-6 bg-white py-2 rounded shadow-sm border border-gray-100">
-            New Version
-          </h3>
-          <div className="flex flex-col items-center">
-            {new_pages.map((page) => (
-              <PageRenderer
-                key={`new-${page.index}`}
-                page={page}
-                blocks={getBlocksForPage(page.index, "new")}
-                type="new"
-              />
-            ))}
+        <div className="grid grid-cols-2 gap-8 px-4">
+          {/* Old Version Column */}
+          <div className="bg-gray-100/50 p-6 rounded-xl border border-gray-200">
+            <h3 className="text-center font-bold text-gray-700 mb-6 bg-white py-2 rounded shadow-sm border border-gray-100">
+              Original Version
+            </h3>
+            <div className="flex flex-col items-center justify-center">
+              {old_pages.map((page) => (
+                <PageRenderer
+                  key={`old-${page.index}`}
+                  page={page}
+                  blocks={getBlocksForPage(page.index, "old")}
+                  type="old"
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* New Version Column */}
+          <div className="bg-gray-100/50 p-6 rounded-xl border border-gray-200">
+            <h3 className="text-center font-bold text-gray-700 mb-6 bg-white py-2 rounded shadow-sm border border-gray-100">
+              New Version
+            </h3>
+            <div className="flex flex-col items-center justify-center">
+              {new_pages.map((page) => (
+                <PageRenderer
+                  key={`new-${page.index}`}
+                  page={page}
+                  blocks={getBlocksForPage(page.index, "new")}
+                  type="new"
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

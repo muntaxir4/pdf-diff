@@ -8,6 +8,8 @@ import hashlib
 import json
 import os
 import sys
+import base64
+import io
 from dataclasses import dataclass
 from difflib import SequenceMatcher
 from typing import Any, Dict, List, Optional, Sequence, Tuple, cast
@@ -297,41 +299,72 @@ def extract_blocks(pdf_path: str) -> ExtractionResult:
 
             images = page.images or []
             for i, img in enumerate(images):
-                # Try to get the image bytes if available via stream; otherwise hash metadata.
+                # Try to get the image bytes for hashing and display
                 img_hash = None
-                try:
-                    if "object_id" in img:
-                        pdf_obj = getattr(page, "pdf", None)
-                        streams = getattr(pdf_obj, "streams", None)
-                        if streams and img["object_id"] in streams:
-                            raw = streams[img["object_id"]].get_data()
-                            img_hash = hash_bytes(raw)
-                except Exception:
-                    img_hash = None
-
-                if not img_hash:
-                    img_hash = hash_bytes(
-                        json.dumps(img, sort_keys=True, default=str).encode("utf-8")
-                    )
+                data_uri = None
 
                 x0 = img.get("x0")
                 top = img.get("top")
                 x1 = img.get("x1")
                 bottom = img.get("bottom")
+
+                # Create a valid bbox tuple
                 bbox: Optional[Tuple[float, float, float, float]] = None
                 if all(v is not None for v in (x0, top, x1, bottom)):
                     bbox = (
-                        float(cast(float, x0)),
-                        float(cast(float, top)),
-                        float(cast(float, x1)),
-                        float(cast(float, bottom)),
+                        float(x0),
+                        float(top),
+                        float(x1),
+                        float(bottom),
+                    )
+
+                if bbox:
+                    # Generate visual representation for the frontend
+                    # We crop the page to the image area and convert to base64
+                    try:
+                        # crop() expects (x0, top, x1, bottom)
+                        cropped = page.crop(bbox)
+                        # to_image() returns a PageImage, .original is the PIL Image
+                        pil_img = cropped.to_image(resolution=72).original
+
+                        buffered = io.BytesIO()
+                        pil_img.save(buffered, format="PNG")
+                        img_str = base64.b64encode(buffered.getvalue()).decode("utf-8")
+                        data_uri = f"data:image/png;base64,{img_str}"
+
+                        # Use the pixel data hash for diffing if we have it
+                        img_hash = hash_bytes(buffered.getvalue())
+                    except Exception as e:
+                        # Fallback if cropping fails
+                        # print(f"Image extraction warning: {e}", file=sys.stderr)
+                        pass
+
+                # Fallback hash calculation if extraction failed or no bbox
+                if not img_hash:
+                    try:
+                        # Try object ID method
+                        if "object_id" in img:
+                            pdf_obj = getattr(page, "pdf", None)
+                            streams = getattr(pdf_obj, "streams", None)
+                            if streams and img["object_id"] in streams:
+                                raw = streams[img["object_id"]].get_data()
+                                img_hash = hash_bytes(raw)
+                    except Exception:
+                        pass
+
+                if not img_hash:
+                    # Last resort: metadata hash
+                    img_hash = hash_bytes(
+                        json.dumps(img, sort_keys=True, default=str).encode("utf-8")
                     )
 
                 blocks.append(
                     Block(
                         block_type="image",
-                        content=img_hash,
-                        norm=img_hash,
+                        content=(
+                            data_uri if data_uri else "[Image]"
+                        ),  # Send base64 to frontend
+                        norm=img_hash,  # Diff on hash
                         page_index=page_index,
                         block_index=i,
                         bbox=bbox,
@@ -347,8 +380,29 @@ def similarity(a: str, b: str) -> float:
     return SequenceMatcher(None, a, b).ratio()
 
 
-def word_diff(old_text: str, new_text: str) -> List[Dict[str, str]]:
+def word_diff(old_text: Any, new_text: Any) -> List[Dict[str, str]]:
     """Generate a word-level diff between two strings."""
+    # Handle non-string content (e.g., images or tables) by treating as raw string or skipping
+    if not isinstance(old_text, str):
+        old_text = str(old_text) if old_text is not None else ""
+    if not isinstance(new_text, str):
+        new_text = str(new_text) if new_text is not None else ""
+
+    # If it's a data URI (image), we don't word diff it.
+    if old_text.startswith("data:image") or new_text.startswith("data:image"):
+        if old_text == new_text:
+            return [{"type": "equal", "value": "[Image]"}]
+        else:
+            if old_text and not new_text:
+                return [{"type": "delete", "value": "[Image]"}]
+            elif not old_text and new_text:
+                return [{"type": "insert", "value": "[Image]"}]
+            else:
+                return [
+                    {"type": "delete", "value": "[Image]"},
+                    {"type": "insert", "value": "[Image]"},
+                ]
+
     # Split while preserving some punctuation if possible, but split() is simple
     old_tokens = old_text.split()
     new_tokens = new_text.split()

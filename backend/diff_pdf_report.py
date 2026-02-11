@@ -3,157 +3,164 @@
 from __future__ import annotations
 
 from typing import Any, Dict, List
+import base64
+from io import BytesIO
 
 from reportlab.lib import colors
-from reportlab.lib.pagesizes import letter
+from reportlab.lib.utils import ImageReader
 from reportlab.pdfgen import canvas
 
 Token = Dict[str, str]
 DiffItem = Dict[str, Any]
 
+def render_github_diff_pdf(diff_data: Dict[str, Any], out_path: str) -> None:
+    """
+    Render a PDF report closely resembling the UI visualization.
+    We restart the canvas for each page in the new/old sets and draw the boxes.
+    Requires the full diff_data object containing 'diff', 'old_pages', and 'new_pages'.
+    """
+    if not isinstance(diff_data, dict) or "diff" not in diff_data:
+        # Fallback if just list passed (legacy support)
+        # We process it as empty pages ref if not provided
+        diff_list = diff_data if isinstance(diff_data, list) else []
+        if isinstance(diff_data, dict): return
+        
+        # If we really just got a list, we can't do the visual diff properly without page sizes.
+        # But let's assume the caller will be fixed.
+        return
 
-def _draw_text_line(
-    c: canvas.Canvas,
-    text: str,
-    x: float,
-    y: float,
-    font_name: str,
-    font_size: int,
-    color=colors.black,
-) -> float:
-    c.setFont(font_name, font_size)
-    c.setFillColor(color)
-    c.drawString(x, y, text)
-    return y
+    diff_list = diff_data["diff"]
+    c = canvas.Canvas(out_path) # Page size will be set per page
 
+    # Helper to draw a set of pages (like 'Original Version' or 'New Version')
+    def draw_pages_side(pages_info, type_key, label):
+        if not pages_info:
+            return
 
-def _draw_wrapped_tokens(
-    c: canvas.Canvas,
-    tokens: List[Token],
-    x: float,
-    y: float,
-    max_width: float,
-    line_height: float,
-    font_name: str,
-    font_size: int,
-) -> float:
-    space_w = c.stringWidth(" ", font_name, font_size)
-    cursor_x = x
-    cursor_y = y
+        for page in pages_info:
+            p_width = page["width"]
+            p_height = page["height"]
+            idx = page["index"]
+            
+            c.setPageSize((p_width, p_height))
+            
+            # White background
+            c.setFillColor(colors.white)
+            c.rect(0, 0, p_width, p_height, fill=1)
+            
+            # Draw Title at top
+            c.setFillColor(colors.black)
+            c.setFont("Helvetica-Bold", 16)
+            c.drawString(20, p_height - 30, f"{label} - Page {idx + 1}")
 
-    def new_line() -> None:
-        nonlocal cursor_x, cursor_y
-        cursor_x = x
-        cursor_y -= line_height
+            # Filter blocks for this page
+            page_blocks = [
+                b for b in diff_list 
+                if (b["old_page"] == idx if type_key == "old" else b["new_page"] == idx)
+            ]
 
-    for token in tokens:
-        value = token["value"]
-        token_type = token["type"]
-        if token_type == "insert":
-            color = colors.green
-        elif token_type == "delete":
-            color = colors.red
-        else:
-            color = colors.black
+            for item in page_blocks:
+                change = item.get("change")
+                bg_color = None
+                border_color = None
+                
+                if change == "deleted":
+                    bg_color = colors.Color(1, 0, 0, alpha=0.1)
+                    border_color = colors.Color(1, 0, 0, alpha=0.5)
+                elif change == "added":
+                    bg_color = colors.Color(0, 1, 0, alpha=0.1)
+                    border_color = colors.Color(0, 1, 0, alpha=0.5)
+                elif change == "modified":
+                    bg_color = colors.Color(1, 0.65, 0, alpha=0.1)
+                    border_color = colors.Color(1, 0.65, 0, alpha=0.5)
+                elif change == "moved":
+                    bg_color = colors.Color(0, 0, 1, alpha=0.1)
+                    border_color = colors.Color(0, 0, 1, alpha=0.5)
+                
+                bbox = item.get("old_bbox") if type_key == "old" else item.get("new_bbox")
+                if not bbox:
+                    continue
+                
+                # pdfplumber bbox: (x0, top, x1, bottom) from top-left
+                # ReportLab: (x, y) from bottom-left
+                x0, top, x1, bottom = bbox
+                rect_x = x0
+                rect_y = p_height - bottom
+                rect_w = x1 - x0
+                rect_h = bottom - top
+                
+                # Draw Box
+                if bg_color:
+                    c.setFillColor(bg_color)
+                    c.setStrokeColor(border_color)
+                    c.rect(rect_x, rect_y, rect_w, rect_h, fill=1, stroke=1)
+                
+                # Draw Text or Image Placeholder
+                c.setStrokeColor(colors.black)
+                c.setFillColor(colors.black)
+                
+                word_diff = item.get("word_diff")
+                
+                if item.get("block_type") == "image":
+                    found_img = False
+                    if word_diff:
+                        val = ""
+                        for t in word_diff:
+                            if isinstance(t, dict):
+                                v = t.get("value", "")
+                                if v.startswith("data:image"):
+                                    val = v
+                                    break
+                                    
+                        if val.startswith("data:image"):
+                             try:
+                                 header, encoded = val.split(",", 1)
+                                 data = base64.b64decode(encoded)
+                                 img_stream = BytesIO(data)
+                                 img_reader = ImageReader(img_stream)
+                                 c.drawImage(img_reader, rect_x, rect_y, width=rect_w, height=rect_h, preserveAspectRatio=True, mask='auto')
+                                 found_img = True
+                             except Exception:
+                                 pass
+                    
+                    if not found_img:
+                        c.setFont("Helvetica-Oblique", 8)
+                        c.drawString(rect_x + 2, rect_y + rect_h/2, "[Image]")
 
-        text_w = c.stringWidth(value, font_name, font_size)
-        if cursor_x + text_w > x + max_width:
-            new_line()
-        c.setFont(font_name, font_size)
-        c.setFillColor(color)
-        c.drawString(cursor_x, cursor_y, value)
-        cursor_x += text_w + space_w
+                elif word_diff:
+                    text_y = rect_y + rect_h - 10 
+                    text_x = rect_x + 2
+                    c.setFont("Helvetica", 10)
+                    
+                    for token in word_diff:
+                        if not isinstance(token, dict): continue
+                        
+                        val = token.get("value", "")
+                        t_type = token.get("type")
+                        
+                        # In Old Version, don't show inserted text. In New Version, don't show deleted text.
+                        if type_key == "old" and t_type == "insert": continue
+                        if type_key == "new" and t_type == "delete": continue
+                        
+                        t_color = colors.black
+                        if type_key == "old" and t_type == "delete": t_color = colors.red
+                        if type_key == "new" and t_type == "insert": t_color = colors.green
+                        
+                        c.setFillColor(t_color)
+                        c.drawString(text_x, text_y, val)
+                        text_x += c.stringWidth(val, "Helvetica", 10) + 2
+                        
+                        if text_x > rect_x + rect_w:
+                             text_x = rect_x + 2
+                             text_y -= 12 # simple line wrapping
+                             if text_y < rect_y: break
+            
+            c.showPage()
 
-    return cursor_y
-
-
-def render_github_diff_pdf(diff: List[DiffItem], out_path: str) -> None:
-    c = canvas.Canvas(out_path, pagesize=letter)
-    width, height = letter
-    margin = 50
-    y = height - margin
-    line_height = 14
-    max_width = width - (2 * margin)
-
-    def page_break() -> None:
-        nonlocal y
-        c.showPage()
-        y = height - margin
-
-    def ensure_space(lines: int = 1) -> None:
-        nonlocal y
-        if y - (lines * line_height) < margin:
-            page_break()
-
-    changed_items = [i for i in diff if i.get("change") != "unchanged"]
-    total_inserted = 0
-    total_deleted = 0
-    for item in diff:
-        if item.get("block_type") == "paragraph":
-            for token in item.get("word_diff", []):
-                if token.get("type") == "insert":
-                    total_inserted += 1
-                elif token.get("type") == "delete":
-                    total_deleted += 1
-
-    _draw_text_line(c, "PDF Diff Report", margin, y, "Helvetica-Bold", 14)
-    y -= line_height
-    _draw_text_line(
-        c,
-        f"Changes: {len(changed_items)} / Total blocks: {len(diff)}",
-        margin,
-        y,
-        "Helvetica",
-        10,
-    )
-    y -= line_height
-    _draw_text_line(
-        c,
-        f"Words inserted: {total_inserted} | Words deleted: {total_deleted}",
-        margin,
-        y,
-        "Helvetica",
-        10,
-    )
-    y -= line_height * 2
-
-    for index, item in enumerate(diff, start=1):
-        ensure_space(3)
-        header = (
-            f"{index}. {item['block_type']} | {item['change']} | "
-            f"old_index={item.get('old_index')} new_index={item.get('new_index')}"
-        )
-        _draw_text_line(c, header, margin, y, "Helvetica-Bold", 10)
-        y -= line_height
-
-        if item["block_type"] == "paragraph" and item.get("word_diff"):
-            inserted = sum(1 for t in item["word_diff"] if t.get("type") == "insert")
-            deleted = sum(1 for t in item["word_diff"] if t.get("type") == "delete")
-            _draw_text_line(
-                c,
-                f"Words: +{inserted} / -{deleted}",
-                margin,
-                y,
-                "Helvetica",
-                9,
-            )
-            y -= line_height
-            ensure_space(2)
-            y = _draw_wrapped_tokens(
-                c,
-                item["word_diff"],
-                margin,
-                y,
-                max_width,
-                line_height,
-                "Helvetica",
-                10,
-            )
-            y -= line_height
-        else:
-            _draw_text_line(c, "(no word diff)", margin, y, "Helvetica", 9)
-            y -= line_height
-
-        y -= line_height / 2
+    # Draw Old Version Pages
+    draw_pages_side(diff_data.get("old_pages", []), "old", "Original Version")
+    
+    # Draw New Version Pages
+    draw_pages_side(diff_data.get("new_pages", []), "new", "New Version")
 
     c.save()

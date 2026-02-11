@@ -28,7 +28,8 @@ const PdfUploader = ({ onDiffResult }) => {
       }
 
       const data = await response.json();
-      onDiffResult(data, oldFile, newFile);
+      // Pass files along with the result so parent can access them for download
+      onDiffResult(data, { oldFile, newFile });
     } catch (err) {
       setError(err.message);
     } finally {
@@ -37,7 +38,7 @@ const PdfUploader = ({ onDiffResult }) => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md mb-8">
+    <div className="bg-white p-6 rounded-lg shadow-md mb-8 max-w-4xl mx-auto">
       <h2 className="text-xl font-bold mb-4">Upload PDFs to Compare</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

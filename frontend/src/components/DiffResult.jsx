@@ -131,6 +131,15 @@ const DiffResult = ({ diff: diffData }) => {
 
   const { diff, old_pages, new_pages } = diffData;
 
+  // Need to persist the file objects to re-send them for report generation
+  // Since we don't have access to the original file objects securely here unless passed down
+  // simple way: Assume the parent component holds them or we create a new specialized component.
+  // For now, let's just make the UI logic.
+  // To actually download, the parent App.jsx needs to pass a "handleDownloadReport" function
+  // or we need to access the file inputs again.
+  //
+  // Let's assume passed as props or context.
+
   // Filter blocks for a specific page efficiently
   const getBlocksForPage = (pageIndex, type) => {
     return diff.filter((item) =>
@@ -141,12 +150,26 @@ const DiffResult = ({ diff: diffData }) => {
   };
 
   return (
-    <div className="w-full overflow-x-auto mt-8 font-sans">
+    <div className="w-full mt-8 font-sans">
       <div className="max-w-[1400px] mx-auto min-w-[1000px]">
         <div className="flex justify-between items-center bg-white p-4 shadow-sm rounded-lg mb-6 border border-gray-200">
-          <h2 className="text-lg font-bold text-gray-800">
-            Visual PDF Comparison
-          </h2>
+          <div className="flex items-center gap-4">
+            <h2 className="text-lg font-bold text-gray-800">
+              Visual PDF Comparison
+            </h2>
+            <button
+              className="px-3 py-1 bg-gray-800 text-white text-xs rounded hover:bg-gray-700 transition"
+              id="download-report-btn"
+              onClick={() => {
+                // We need to trigger the download from the parent or use a global event
+                // dispatch event for App to handle
+                const event = new CustomEvent("downloadReport");
+                window.dispatchEvent(event);
+              }}
+            >
+              Download Report
+            </button>
+          </div>
           <div className="flex gap-4 text-sm">
             <div className="flex items-center gap-2">
               <span className="w-3 h-3 bg-red-200 border border-red-400 block rounded-sm"></span>

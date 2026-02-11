@@ -391,16 +391,16 @@ def word_diff(old_text: Any, new_text: Any) -> List[Dict[str, str]]:
     # If it's a data URI (image), we don't word diff it.
     if old_text.startswith("data:image") or new_text.startswith("data:image"):
         if old_text == new_text:
-            return [{"type": "equal", "value": "[Image]"}]
+            return [{"type": "equal", "value": old_text}]
         else:
             if old_text and not new_text:
-                return [{"type": "delete", "value": "[Image]"}]
+                return [{"type": "delete", "value": old_text}]
             elif not old_text and new_text:
-                return [{"type": "insert", "value": "[Image]"}]
+                return [{"type": "insert", "value": new_text}]
             else:
                 return [
-                    {"type": "delete", "value": "[Image]"},
-                    {"type": "insert", "value": "[Image]"},
+                    {"type": "delete", "value": old_text},
+                    {"type": "insert", "value": new_text},
                 ]
 
     # Split while preserving some punctuation if possible, but split() is simple

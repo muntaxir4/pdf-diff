@@ -1,228 +1,192 @@
-import React, { useState } from "react";
+import React, { useMemo } from "react";
 
-const DiffResult = ({ diff }) => {
-  const [viewMode, setViewMode] = useState("unified"); // 'unified' | 'split'
+const PageRenderer = ({ page, blocks, type }) => {
+  // Constants for display
+  const PAGE_WIDTH_PX = 500; // Fixed display width
+  const scale = PAGE_WIDTH_PX / page.width;
+  const heightPx = page.height * scale;
 
-  if (!diff || diff.length === 0) return null;
+  return (
+    <div
+      className="mb-8 relative shadow-lg bg-white border border-gray-200 mx-auto"
+      style={{ width: PAGE_WIDTH_PX, height: heightPx }}
+    >
+      {/* Page Number Label */}
+      <div className="absolute -top-6 left-0 text-xs text-gray-500 font-bold uppercase tracking-wider">
+        Page {page.index + 1}
+      </div>
 
-  // Calculate stats
-  const stats = {
-    total: diff.length,
-    modified: diff.filter((i) => i.change === "modified").length,
-    added: diff.filter((i) => i.change === "added").length,
-    deleted: diff.filter((i) => i.change === "deleted").length,
-    wordsInserted: diff.reduce(
-      (acc, item) =>
-        acc +
-        (item.word_diff
-          ? item.word_diff.filter((t) => t.type === "insert").length
-          : 0),
-      0,
-    ),
-    wordsDeleted: diff.reduce(
-      (acc, item) =>
-        acc +
-        (item.word_diff
-          ? item.word_diff.filter((t) => t.type === "delete").length
-          : 0),
-      0,
-    ),
-  };
+      {blocks.map((item, idx) => {
+        const bbox = type === "old" ? item.old_bbox : item.new_bbox;
+        if (!bbox) return null;
 
-  const reconstructText = (wordDiff, version) => {
-    if (!wordDiff) return "";
-    return wordDiff
-      .filter((t) =>
-        version === "old" ? t.type !== "insert" : t.type !== "delete",
-      )
-      .map((t) => t.value)
-      .join(" ");
+        const [x0, top, x1, bottom] = bbox;
+        const left = x0 * scale;
+        const t = top * scale;
+        const w = (x1 - x0) * scale;
+        const h = (bottom - top) * scale;
+
+        let bgColor = "transparent";
+        let borderColor = "transparent";
+
+        if (item.change === "deleted") {
+          bgColor = "rgba(255, 0, 0, 0.2)"; // Red for deleted
+          borderColor = "rgba(255, 0, 0, 0.5)";
+        } else if (item.change === "added") {
+          bgColor = "rgba(0, 255, 0, 0.2)"; // Green for added
+          borderColor = "rgba(0, 255, 0, 0.5)";
+        } else if (item.change === "modified") {
+          bgColor = "rgba(255, 165, 0, 0.2)"; // Orange for modified
+          borderColor = "rgba(255, 165, 0, 0.5)";
+        } else if (item.change === "moved") {
+          bgColor = "rgba(0, 0, 255, 0.2)"; // Blue for moved
+          borderColor = "rgba(0, 0, 255, 0.5)";
+        }
+
+        // Reconstruct text content for display
+        const textContent = item.word_diff
+          ? item.word_diff
+              .filter((w) =>
+                type === "old" ? w.type !== "insert" : w.type !== "delete",
+              )
+              .map((w) => w.value)
+              .join(" ")
+          : "";
+
+        // Render individual words inside the block to simulate proper highlighting
+        const renderWords = () => {
+          if (item.block_type === "image") return <span>[Image]</span>;
+          if (!item.word_diff) return textContent;
+
+          return item.word_diff
+            .filter((w) =>
+              type === "old" ? w.type !== "insert" : w.type !== "delete",
+            )
+            .map((w, i) => {
+              let wordBg = "transparent";
+              if (
+                type === "old" &&
+                w.type === "delete" &&
+                item.change === "modified"
+              ) {
+                wordBg = "rgba(255, 0, 0, 0.4)";
+              } else if (
+                type === "new" &&
+                w.type === "insert" &&
+                item.change === "modified"
+              ) {
+                wordBg = "rgba(0, 255, 0, 0.4)";
+              }
+
+              return (
+                <span key={i} style={{ backgroundColor: wordBg }}>
+                  {w.value}{" "}
+                </span>
+              );
+            });
+        };
+
+        return (
+          <div
+            key={idx}
+            className="absolute leading-tight hover:z-10 hover:outline hover:outline-blue-500 select-none cursor-pointer flex items-start flex-wrap content-start"
+            title={textContent}
+            style={{
+              left: left,
+              top: t,
+              width: w,
+              height: h,
+              backgroundColor: bgColor,
+              border: `1px solid ${borderColor}`,
+              color: "rgba(0,0,0,0.8)",
+              fontSize: "10px",
+              whiteSpace: "pre-wrap",
+              wordBreak: "break-all",
+              overflow: "hidden",
+            }}
+          >
+            {renderWords()}
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const DiffResult = ({ diff: diffData }) => {
+  if (!diffData || !diffData.diff) return null;
+
+  const { diff, old_pages, new_pages } = diffData;
+
+  // Filter blocks for a specific page efficiently
+  const getBlocksForPage = (pageIndex, type) => {
+    return diff.filter((item) =>
+      type === "old"
+        ? item.old_page === pageIndex
+        : item.new_page === pageIndex,
+    );
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto mt-8 bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden font-sans">
-      {/* Header / Toolbar */}
-      <div className="bg-gray-50 border-b border-gray-200 px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h2 className="text-sm font-semibold text-gray-700">Diff Summary</h2>
-          <div className="text-xs text-gray-500 mt-1 flex gap-3">
-            <span className="flex items-center text-green-600 font-medium">
-              <span className="text-lg mr-1">+</span>
-              {stats.wordsInserted} words
-            </span>
-            <span className="flex items-center text-red-600 font-medium">
-              <span className="text-lg mr-1">-</span>
-              {stats.wordsDeleted} words
-            </span>
-            <span className="flex items-center text-gray-600">
-              {stats.total} blocks changed
-            </span>
+    <div className="w-full max-w-[1400px] mx-auto mt-8 font-sans">
+      <div className="flex justify-between items-center bg-white p-4 shadow-sm rounded-lg mb-6 border border-gray-200">
+        <h2 className="text-lg font-bold text-gray-800">
+          Visual PDF Comparison
+        </h2>
+        <div className="flex gap-4 text-sm">
+          <div className="flex items-center gap-2">
+            <span className="w-3 h-3 bg-red-200 border border-red-400 block rounded-sm"></span>
+            <span className="text-gray-600">Deleted (Old)</span>
           </div>
-        </div>
-
-        <div className="flex bg-white rounded-md shadow-sm border border-gray-300 overflow-hidden shrink-0">
-          <button
-            onClick={() => setViewMode("unified")}
-            className={`px-4 py-1.5 text-xs font-medium cursor-pointer transition-colors ${
-              viewMode === "unified"
-                ? "bg-blue-50 text-blue-700 border-r border-gray-200"
-                : "text-gray-600 hover:bg-gray-50 border-r border-gray-200"
-            }`}
-          >
-            Unified
-          </button>
-          <button
-            onClick={() => setViewMode("split")}
-            className={`px-4 py-1.5 text-xs font-medium cursor-pointer transition-colors ${
-              viewMode === "split"
-                ? "bg-blue-50 text-blue-700"
-                : "text-gray-600 hover:bg-gray-50"
-            }`}
-          >
-            Split
-          </button>
+          <div className="flex items-center gap-2">
+            <span className="w-3 h-3 bg-green-200 border border-green-400 block rounded-sm"></span>
+            <span className="text-gray-600">Added (New)</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="w-3 h-3 bg-orange-200 border border-orange-400 block rounded-sm"></span>
+            <span className="text-gray-600">Modified</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="w-3 h-3 bg-blue-200 border border-blue-400 block rounded-sm"></span>
+            <span className="text-gray-600">Moved</span>
+          </div>
         </div>
       </div>
 
-      {/* Changes List */}
-      <div className="divide-y divide-gray-200">
-        {diff.map((item, idx) => {
-          const prevItem = idx > 0 ? diff[idx - 1] : null;
-          // Show page header if page changed or first item
-          const currentOldPage = item.old_page;
-          const currentNewPage = item.new_page;
-          const prevOldPage = prevItem ? prevItem.old_page : -1;
-          const prevNewPage = prevItem ? prevItem.new_page : -1;
+      <div className="grid grid-cols-2 gap-8">
+        {/* Old Version Column */}
+        <div className="bg-gray-100/50 p-6 rounded-xl border border-gray-200">
+          <h3 className="text-center font-bold text-gray-700 mb-6 bg-white py-2 rounded shadow-sm border border-gray-100">
+            Original Version
+          </h3>
+          <div className="flex flex-col items-center">
+            {old_pages.map((page) => (
+              <PageRenderer
+                key={`old-${page.index}`}
+                page={page}
+                blocks={getBlocksForPage(page.index, "old")}
+                type="old"
+              />
+            ))}
+          </div>
+        </div>
 
-          const showHeader =
-            idx === 0 ||
-            (currentOldPage !== null && currentOldPage !== prevOldPage) ||
-            (currentNewPage !== null && currentNewPage !== prevNewPage);
-
-          return (
-            <div key={idx} className="bg-white">
-              {showHeader && (
-                <div className="bg-[#f6f8fa] px-4 py-2 border-y border-gray-200 text-xs font-mono text-gray-500 flex items-center mt-[-1px]">
-                  <span>
-                    {item.old_page !== null
-                      ? `Page ${item.old_page + 1}`
-                      : "..."}
-                    {" → "}
-                    {item.new_page !== null
-                      ? `Page ${item.new_page + 1}`
-                      : "..."}
-                  </span>
-                </div>
-              )}
-
-              <div className="text-sm">
-                {/* Unified View */}
-                {viewMode === "unified" && (
-                  <div
-                    className={`
-                    ${
-                      item.change === "added"
-                        ? "bg-[#e6ffec]"
-                        : item.change === "deleted"
-                          ? "bg-[#ffebe9]"
-                          : "bg-white"
-                    } 
-                    hover:bg-opacity-80 transition-colors
-                  `}
-                  >
-                    <div className="flex">
-                      {/* Line Numbers */}
-                      <div className="flex w-16 shrink-0 border-r border-gray-100 bg-white/50 select-none">
-                        <div className="w-8 text-right pr-2 py-2 text-xs text-gray-400 font-mono">
-                          {item.old_index !== null ? item.old_index + 1 : ""}
-                        </div>
-                        <div className="w-8 text-right pr-2 py-2 text-xs text-gray-400 font-mono">
-                          {item.new_index !== null ? item.new_index + 1 : ""}
-                        </div>
-                      </div>
-
-                      {/* Content */}
-                      <div className="grow p-2 break-words whitespace-pre-wrap leading-relaxed font-mono text-[13px]">
-                        {item.block_type === "image" ? (
-                          <span className="text-gray-500 italic">
-                            [Image Comparison - Hash Diff (Not rendered)]
-                          </span>
-                        ) : item.word_diff ? (
-                          item.word_diff.map((token, tIdx) => (
-                            <span
-                              key={tIdx}
-                              className={`${
-                                token.type === "insert"
-                                  ? "bg-[#abf2bc] text-black decoration-0 mx-0.5 px-0.5 rounded-[2px]"
-                                  : token.type === "delete"
-                                    ? "bg-[#ffc0c0] text-black decoration-0 mx-0.5 px-0.5 rounded-[2px]"
-                                    : ""
-                              }`}
-                            >
-                              {token.value}{" "}
-                            </span>
-                          ))
-                        ) : (
-                          // Fallback
-                          <span>
-                            {item.change === "added"
-                              ? reconstructText(item.word_diff, "new")
-                              : reconstructText(item.word_diff, "old")}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Split View */}
-                {viewMode === "split" && (
-                  <div className="grid grid-cols-2 divide-x divide-gray-200">
-                    {/* Left Side (Old) */}
-                    <div
-                      className={`${
-                        item.change === "deleted" || item.change === "modified"
-                          ? "bg-[#ffebe9]"
-                          : "bg-white"
-                      } flex`}
-                    >
-                      <div className="w-8 shrink-0 border-r border-gray-100/50 bg-gray-50/50 text-right pr-2 py-2 text-xs text-gray-400 font-mono select-none">
-                        {item.old_index !== null ? item.old_index + 1 : ""}
-                      </div>
-                      <div className="grow p-2 break-words whitespace-pre-wrap font-mono text-[13px] text-gray-800">
-                        {item.change === "added" ? (
-                          <div className="bg-gray-50/50 h-full w-full"></div>
-                        ) : (
-                          reconstructText(item.word_diff, "old")
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Right Side (New) */}
-                    <div
-                      className={`${
-                        item.change === "added" || item.change === "modified"
-                          ? "bg-[#e6ffec]"
-                          : "bg-white"
-                      } flex`}
-                    >
-                      <div className="w-8 shrink-0 border-r border-gray-100/50 bg-gray-50/50 text-right pr-2 py-2 text-xs text-gray-400 font-mono select-none">
-                        {item.new_index !== null ? item.new_index + 1 : ""}
-                      </div>
-                      <div className="grow p-2 break-words whitespace-pre-wrap font-mono text-[13px] text-gray-800">
-                        {item.change === "deleted" ? (
-                          <div className="bg-gray-50/50 h-full w-full"></div>
-                        ) : (
-                          reconstructText(item.word_diff, "new")
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          );
-        })}
+        {/* New Version Column */}
+        <div className="bg-gray-100/50 p-6 rounded-xl border border-gray-200">
+          <h3 className="text-center font-bold text-gray-700 mb-6 bg-white py-2 rounded shadow-sm border border-gray-100">
+            New Version
+          </h3>
+          <div className="flex flex-col items-center">
+            {new_pages.map((page) => (
+              <PageRenderer
+                key={`new-${page.index}`}
+                page={page}
+                blocks={getBlocksForPage(page.index, "new")}
+                type="new"
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );

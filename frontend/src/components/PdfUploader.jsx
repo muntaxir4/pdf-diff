@@ -18,7 +18,7 @@ const PdfUploader = ({ onDiffResult }) => {
     formData.append("new_pdf", newFile);
 
     try {
-      const response = await fetch("http://localhost:8000/diff", {
+      const response = await fetch("http://localhost:8080/diff", {
         method: "POST",
         body: formData,
       });
@@ -28,7 +28,7 @@ const PdfUploader = ({ onDiffResult }) => {
       }
 
       const data = await response.json();
-      onDiffResult(data);
+      onDiffResult(data, oldFile, newFile);
     } catch (err) {
       setError(err.message);
     } finally {

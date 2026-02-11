@@ -43,13 +43,25 @@ async def calculate_diff(
             new_tmp.close()
 
             # Extract blocks using existing logic
-            old_blocks = pdfdiff.extract_blocks(old_tmp_path)
-            new_blocks = pdfdiff.extract_blocks(new_tmp_path)
+            old_res = pdfdiff.extract_blocks(old_tmp_path)
+            new_res = pdfdiff.extract_blocks(new_tmp_path)
 
             # Build diff
-            diff_results = pdfdiff.build_diff(old_blocks, new_blocks, threshold=0.7)
+            diff_results = pdfdiff.build_diff(
+                old_res.blocks, new_res.blocks, threshold=0.7
+            )
 
-            return diff_results
+            return {
+                "diff": diff_results,
+                "old_pages": [
+                    {"width": p.width, "height": p.height, "index": p.index}
+                    for p in old_res.pages
+                ],
+                "new_pages": [
+                    {"width": p.width, "height": p.height, "index": p.index}
+                    for p in new_res.pages
+                ],
+            }
 
         except Exception as e:
             raise HTTPException(status_code=500, detail=str(e))
@@ -64,4 +76,4 @@ async def calculate_diff(
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8080)

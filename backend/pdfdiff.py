@@ -78,7 +78,9 @@ def is_bullet_start(text: str) -> bool:
     )
 
 
-def _split_paragraphs_from_lines(lines: List[Dict[str, Any]]) -> List[str]:
+def _split_paragraphs_from_lines(
+    lines: List[Dict[str, Any]], page_width: float = 600.0
+) -> List[Dict[str, Any]]:
     if not lines:
         return []
 
@@ -97,113 +99,114 @@ def _split_paragraphs_from_lines(lines: List[Dict[str, Any]]) -> List[str]:
     gap_threshold = 12.0
     median_gap = 0.0
     if gaps:
-        median_gap = sorted(gaps)[len(gaps) // 2]
-        gap_threshold = max(12.0, median_gap * 1.5)
+        sorted_gaps = sorted(gaps)
+        median_gap = sorted_gaps[(len(sorted_gaps) - 1) // 2]
+        gap_threshold = max(6.0, median_gap * 1.25)
 
-    def is_sentence_end(value: str) -> bool:
-        trimmed = clean_text(value)
-        if not trimmed:
-            return False
-        if trimmed.endswith(("-", "‐", "‑", "–", "—")):
-            return False
-        return trimmed.endswith((".", "!", "?", ".”", '!"', '?"', '".'))
-
-    def starts_new_sentence(value: str) -> bool:
-        trimmed = clean_text(value)
-        if not trimmed:
-            return False
-        first = trimmed[0]
-        return first.isupper() or first.isdigit()
-
-    def is_section_header(value: str) -> bool:
-        trimmed = clean_text(value)
-        if not trimmed:
-            return False
-        if len(trimmed) > 40:
-            return False
-        letters = [c for c in trimmed if c.isalpha()]
-        if not letters:
-            return False
-        return all(c.isupper() for c in letters)
-
-    min_x0 = min(x0_values) if x0_values else 0.0
-    indent_tolerance = 8.0
-    column_break_threshold = 24.0
-
-    def join_buffer(buf: List[str]) -> str:
+    def join_buffer(buf: List[Dict[str, Any]]) -> Dict[str, Any]:
         if not buf:
-            return ""
-        text = buf[0]
-        for line in buf[1:]:
-            if text.endswith(("-", "‐", "‑")):
-                # Likely hyphenated word at line break
-                text = text[:-1] + line
-            else:
-                text += " " + line
-        return text
+            return {"text": "", "bbox": None}
 
-    paragraphs: List[str] = []
-    buffer: List[str] = []
+        # Merge text
+        text_parts = []
+        for i, line in enumerate(buf):
+            t = line.get("text", "").strip()
+            t = clean_text(t)
+            if not t:
+                continue
+            if i > 0:
+                prev_raw = buf[i - 1].get("text", "").strip()
+                prev_clean = clean_text(prev_raw)
+                if prev_clean.endswith(("-", "‐", "‑")):
+                    if text_parts:
+                        text_parts[-1] = text_parts[-1][:-1] + t
+                    else:
+                        text_parts.append(t)
+                else:
+                    text_parts.append(t)
+            else:
+                text_parts.append(t)
+
+        merged_text = " ".join(text_parts)
+
+        # Merge bbox
+        x0s = [float(l["x0"]) for l in buf if l.get("x0") is not None]
+        tops = [float(l["top"]) for l in buf if l.get("top") is not None]
+        x1s = [float(l["x1"]) for l in buf if l.get("x1") is not None]
+        bottoms = [float(l["bottom"]) for l in buf if l.get("bottom") is not None]
+
+        bbox = None
+        if x0s and tops and x1s and bottoms:
+            bbox = (min(x0s), min(tops), max(x1s), max(bottoms))
+
+        return {"text": merged_text, "bbox": bbox}
+
+    paragraphs: List[Dict[str, Any]] = []
+    buffer: List[Dict[str, Any]] = []
+
     prev_bottom: Optional[float] = None
-    prev_text: str = ""
     prev_x0: Optional[float] = None
+    prev_x1: Optional[float] = None
+
+    column_break_threshold = 24.0
+    short_line_threshold = 60.0  # pixels to edge
+
+    # Estimate content right margin from statistics if possible
+    max_content_x1 = 0.0
+    for l in sorted_lines:
+        lx1 = l.get("x1")
+        if isinstance(lx1, (int, float)) and lx1 > max_content_x1:
+            max_content_x1 = float(lx1)
+
+    reference_right = max_content_x1 if max_content_x1 > 0 else page_width
+
     for line in sorted_lines:
-        text = line.get("text") or ""
+        text = line.get("text", "")
         cleaned = clean_text(text)
         if not cleaned:
             continue
+
         top = line.get("top")
         x0 = line.get("x0")
+        x1 = line.get("x1")
         line_x0 = float(x0) if isinstance(x0, (int, float)) else None
+        line_x1 = float(x1) if isinstance(x1, (int, float)) else None
+
         gap = None
         if prev_bottom is not None and isinstance(top, (int, float)):
             gap = top - prev_bottom
 
-        # Trigger break on bullet or section header
-        if buffer and (
-            is_bullet_start(cleaned)
-            or (
-                len(cleaned) < 40
-                and cleaned.isupper()
-                and any(c.isalpha() for c in cleaned)
-            )
-        ):
+        should_split = False
+
+        if buffer and is_bullet_start(cleaned):
+            should_split = True
+
+        if not should_split and gap is not None and gap > gap_threshold:
+            should_split = True
+
+        if not should_split and line_x0 is not None and prev_x0 is not None:
+            if abs(line_x0 - prev_x0) >= column_break_threshold:
+                should_split = True
+
+        # Short line heuristic
+        if not should_split and prev_x1 is not None and gap is not None:
+            dist_to_right = reference_right - prev_x1
+            if dist_to_right > short_line_threshold and gap > 0:
+                should_split = True
+
+        if buffer and should_split:
             paragraphs.append(join_buffer(buffer))
             buffer = []
 
-        if (
-            gap is not None
-            and buffer
-            and (
-                gap > gap_threshold
-                or (
-                    gap >= max(2.0, median_gap * 0.8)
-                    and is_sentence_end(prev_text)
-                    and starts_new_sentence(cleaned)
-                )
-                or (
-                    is_sentence_end(prev_text)
-                    and starts_new_sentence(cleaned)
-                    and line_x0 is not None
-                    and abs(line_x0 - min_x0) <= indent_tolerance
-                )
-                or (
-                    line_x0 is not None
-                    and prev_x0 is not None
-                    and abs(line_x0 - prev_x0) >= column_break_threshold
-                )
-            )
-        ):
-            paragraphs.append(join_buffer(buffer))
-            buffer = []
-        buffer.append(cleaned)
+        buffer.append(line)
+
         prev_bottom = (
             line.get("bottom")
             if isinstance(line.get("bottom"), (int, float))
             else prev_bottom
         )
         prev_x0 = line_x0 if line_x0 is not None else prev_x0
-        prev_text = cleaned
+        prev_x1 = line_x1 if line_x1 is not None else prev_x1
 
     if buffer:
         paragraphs.append(join_buffer(buffer))
@@ -211,35 +214,69 @@ def _split_paragraphs_from_lines(lines: List[Dict[str, Any]]) -> List[str]:
     return paragraphs
 
 
-def extract_blocks(pdf_path: str) -> List[Block]:
+@dataclass
+class PageInfo:
+    width: float
+    height: float
+    index: int
+
+
+@dataclass
+class ExtractionResult:
+    blocks: List[Block]
+    pages: List[PageInfo]
+
+
+def extract_blocks(pdf_path: str) -> ExtractionResult:
     blocks: List[Block] = []
+    pages: List[PageInfo] = []
+
     # Use tighter tolerance (defaults: x=3, y=3) to avoid merging words
     # x_tolerance=2 helps with resumes that often have tight kerning or missing spaces
     extraction_settings = {"x_tolerance": 2, "y_tolerance": 3}
 
+    # We can also attempt to extract physical layout first to guide paragraph merging
+    # But pdfplumber text_lines is usually good enough if we handle gaps right.
+
     with pdfplumber.open(pdf_path) as pdf:
         for page_index, page in enumerate(pdf.pages):
-            text_lines = page.extract_text_lines(**extraction_settings) or []
-            paragraphs = _split_paragraphs_from_lines(text_lines)
-            if not paragraphs:
-                text = page.extract_text(**extraction_settings) or ""
-                paragraphs = (
-                    [
-                        " ".join(
-                            line.strip() for line in text.splitlines() if line.strip()
-                        )
-                    ]
-                    if text.strip()
-                    else []
+            pages.append(
+                PageInfo(
+                    width=float(page.width), height=float(page.height), index=page_index
                 )
-            for i, para in enumerate(paragraphs):
+            )
+            text_lines = page.extract_text_lines(**extraction_settings) or []
+            paragraphs_data = _split_paragraphs_from_lines(
+                text_lines, page_width=float(page.width)
+            )
+
+            if not paragraphs_data:
+                # Fallback for empty line extraction
+                text = page.extract_text(**extraction_settings) or ""
+                if text.strip():
+                    # No bbox for fallback
+                    blocks.append(
+                        Block(
+                            block_type="paragraph",
+                            content=text.strip(),
+                            norm=normalize_text(text.strip()),
+                            page_index=page_index,
+                            block_index=0,
+                            bbox=None,
+                        )
+                    )
+
+            for i, p_data in enumerate(paragraphs_data):
+                content = p_data["text"]
+                bbox = p_data["bbox"]
                 blocks.append(
                     Block(
                         block_type="paragraph",
-                        content=para,
-                        norm=normalize_text(para),
+                        content=content,
+                        norm=normalize_text(content),
                         page_index=page_index,
                         block_index=i,
+                        bbox=bbox,
                     )
                 )
 
@@ -301,7 +338,7 @@ def extract_blocks(pdf_path: str) -> List[Block]:
                     )
                 )
 
-    return blocks
+    return ExtractionResult(blocks=blocks, pages=pages)
 
 
 def similarity(a: str, b: str) -> float:
@@ -373,6 +410,8 @@ def build_diff(
                         "old_page": old.page_index,
                         "new_page": new.page_index,
                         "word_diff": diff,
+                        "old_bbox": old.bbox,
+                        "new_bbox": new.bbox,
                     }
                 )
         elif tag == "delete":
@@ -387,6 +426,8 @@ def build_diff(
                         "old_page": old.page_index,
                         "new_page": None,
                         "word_diff": word_diff(old.content, ""),
+                        "old_bbox": old.bbox,
+                        "new_bbox": None,
                     }
                 )
         elif tag == "insert":
@@ -401,6 +442,8 @@ def build_diff(
                         "old_page": None,
                         "new_page": new.page_index,
                         "word_diff": word_diff("", new.content),
+                        "old_bbox": None,
+                        "new_bbox": new.bbox,
                     }
                 )
         elif tag == "replace":
@@ -433,10 +476,6 @@ def build_diff(
             matched_old = {m[0] for m in matched}
             matched_new = {m[1] for m in matched}
 
-            # To maintain some order, we can output deletions, then matched/modified, then insertions
-            # or try to interleave. Let's just follow the order of the old document for deletions/matches
-            # and then the new document for remaining insertions.
-
             for oi in sub_old_idx:
                 if oi in matched_old:
                     # Find which new index it matched
@@ -453,6 +492,8 @@ def build_diff(
                             "old_page": old.page_index,
                             "new_page": new.page_index,
                             "word_diff": diff,
+                            "old_bbox": old.bbox,
+                            "new_bbox": new.bbox,
                         }
                     )
                 else:
@@ -466,6 +507,8 @@ def build_diff(
                             "old_page": old.page_index,
                             "new_page": None,
                             "word_diff": word_diff(old.content, ""),
+                            "old_bbox": old.bbox,
+                            "new_bbox": None,
                         }
                     )
 
@@ -481,8 +524,66 @@ def build_diff(
                             "old_page": None,
                             "new_page": new.page_index,
                             "word_diff": word_diff("", new.content),
+                            "old_bbox": None,
+                            "new_bbox": new.bbox,
                         }
                     )
+
+    # Post-processing: Detect Moves
+    # Identify items that were marked 'deleted' and 'added' but have identical/similar content
+    deleted_indices = [i for i, r in enumerate(results) if r["change"] == "deleted"]
+    added_indices = [i for i, r in enumerate(results) if r["change"] == "added"]
+
+    # Simple exact match heuristic (can be expanded to high similarity)
+    # We loop through deleted items and try to find a match in added items
+    used_added_indices = set()
+
+    for d_idx in deleted_indices:
+        d_item = results[d_idx]
+        d_content_norm = old_blocks[d_item["old_index"]].norm
+
+        # Try to find a match in added items
+        match_found_idx = None
+        for a_idx in added_indices:
+            if a_idx in used_added_indices:
+                continue
+
+            a_item = results[a_idx]
+            if d_item["block_type"] != a_item["block_type"]:
+                continue
+
+            a_content_norm = new_blocks[a_item["new_index"]].norm
+
+            # Use exact match for now to be safe, or high threshold
+            if d_content_norm == a_content_norm and len(d_content_norm) > 10:
+                match_found_idx = a_idx
+                break
+
+        if match_found_idx is not None:
+            # Link them as moved
+            a_item = results[match_found_idx]
+            used_added_indices.add(match_found_idx)
+
+            # Update the 'deleted' entry to be 'moved_source' (or just moved)
+            # Update the 'added' entry to be 'moved_target'
+            # Or better: merge them logic wise for the viewer?
+            # For the viewer to show them on both sides, we need to keep both entries
+            # but change their status so UI can color them differently.
+
+            results[d_idx]["change"] = "moved"
+            results[d_idx]["new_index"] = a_item["new_index"]
+            results[d_idx]["new_page"] = a_item["new_page"]
+            results[d_idx]["new_bbox"] = a_item["new_bbox"]
+            results[d_idx]["word_diff"] = word_diff(
+                old_blocks[d_item["old_index"]].content,
+                new_blocks[a_item["new_index"]].content,
+            )
+
+            results[match_found_idx]["change"] = "moved"
+            results[match_found_idx]["old_index"] = d_item["old_index"]
+            results[match_found_idx]["old_page"] = d_item["old_page"]
+            results[match_found_idx]["old_bbox"] = d_item["old_bbox"]
+            results[match_found_idx]["word_diff"] = results[d_idx]["word_diff"]
 
     return results
 
@@ -515,17 +616,32 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         return 2
 
     try:
-        old_blocks = extract_blocks(args.old_pdf)
-        new_blocks = extract_blocks(args.new_pdf)
+        old_res = extract_blocks(args.old_pdf)
+        new_res = extract_blocks(args.new_pdf)
+        old_blocks = old_res.blocks
+        new_blocks = new_res.blocks
     except Exception as exc:
         print(f"Error: failed to parse PDFs: {exc}", file=sys.stderr)
         return 3
 
     diff = build_diff(old_blocks, new_blocks, args.threshold)
 
+    # Structure output to include page info
+    output = {
+        "diff": diff,
+        "old_pages": [
+            {"width": p.width, "height": p.height, "index": p.index}
+            for p in old_res.pages
+        ],
+        "new_pages": [
+            {"width": p.width, "height": p.height, "index": p.index}
+            for p in new_res.pages
+        ],
+    }
+
     try:
         with open(args.out, "w", encoding="utf-8") as f:
-            json.dump(diff, f, indent=2, ensure_ascii=False)
+            json.dump(output, f, indent=2, ensure_ascii=False)
     except Exception as exc:
         print(f"Error: failed to write output: {exc}", file=sys.stderr)
         return 4
